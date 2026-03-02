@@ -1,0 +1,64 @@
+---
+import ArticleCard from './ArticleCard.astro';
+
+export interface RelatedArticle {
+  id: string;
+  data: {
+    title: string;
+    description: string;
+    category: string;
+    author: string;
+    publishDate: string;
+  };
+  body?: string;
+}
+
+export interface Props {
+  articles: RelatedArticle[];
+}
+
+const { articles } = Astro.props;
+---
+
+{articles.length > 0 && (
+  <section class="related-articles">
+    <h2>Related articles</h2>
+    <div class="related-grid">
+      {articles.map((article) => (
+        <ArticleCard
+          title={article.data.title}
+          description={article.data.description}
+          slug={article.id}
+          category={article.data.category}
+          author={article.data.author}
+          publishDate={article.data.publishDate}
+          wordCount={article.body ? article.body.split(/\s+/).length : 0}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-articles {
+    margin-top: var(--space-12);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .related-articles h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-6);
+  }
+
+  .related-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .related-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

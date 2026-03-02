@@ -1,0 +1,104 @@
+---
+export interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+export interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Only show for H2 and H3, and only if 4+ headings
+const filteredHeadings = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const showToc = filteredHeadings.length >= 4;
+
+// Group H3s under their parent H2
+interface TocItem {
+  heading: Heading;
+  children: Heading[];
+}
+
+const tocItems: TocItem[] = [];
+for (const heading of filteredHeadings) {
+  if (heading.depth === 2) {
+    tocItems.push({ heading, children: [] });
+  } else if (heading.depth === 3 && tocItems.length > 0) {
+    tocItems[tocItems.length - 1].children.push(heading);
+  }
+}
+---
+
+{showToc && (
+  <nav class="toc" aria-label="Table of contents">
+    <h2 class="toc-title">In this article</h2>
+    <ul class="toc-list">
+      {tocItems.map((item) => (
+        <li>
+          <a href={`#${item.heading.slug}`}>{item.heading.text}</a>
+          {item.children.length > 0 && (
+            <ul class="toc-sublist">
+              {item.children.map((child) => (
+                <li>
+                  <a href={`#${child.slug}`}>{child.text}</a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}
+
+<style>
+  .toc {
+    padding: 0;
+    margin: 0;
+  }
+
+  .toc-title {
+    font-size: var(--text-base) !important;
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .toc-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .toc-list > li {
+    margin-bottom: var(--space-2);
+  }
+
+  .toc-list a {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .toc-list a:hover {
+    color: var(--color-link);
+  }
+
+  .toc-sublist {
+    list-style: none;
+    padding-left: var(--space-4);
+    margin-top: var(--space-2);
+  }
+
+  .toc-sublist li {
+    margin-bottom: var(--space-1);
+  }
+
+  .toc-sublist a {
+    color: var(--color-text-tertiary);
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  schemas?: object[];
+}
+
+const { title, description, canonical, ogImage, ogType = 'website', schemas = [] } = Astro.props;
+
+const siteTitle = 'CRM Beat';
+const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- RSS -->
+<link rel="alternate" type="application/rss+xml" title="CRM Beat RSS Feed" href="/rss.xml" />
+
+<!-- Open Graph -->
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonicalUrl} />
+{ogImage && <meta property="og:image" content={ogImage} />}
+<meta property="og:site_name" content={siteTitle} />
+<meta property="og:locale" content="en_GB" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+<!-- JSON-LD -->
+{schemas.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

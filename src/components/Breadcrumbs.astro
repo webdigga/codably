@@ -1,0 +1,74 @@
+---
+export interface Crumb {
+  label: string;
+  href?: string;
+}
+
+export interface Props {
+  crumbs: Crumb[];
+}
+
+const { crumbs } = Astro.props;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: crumbs.map((crumb, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: crumb.label,
+    ...(crumb.href ? { item: new URL(crumb.href, 'https://crmbeat.com').href } : {}),
+  })),
+};
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {crumbs.map((crumb, i) => (
+      <li>
+        {crumb.href ? (
+          <a href={crumb.href}>{crumb.label}</a>
+        ) : (
+          <span aria-current="page">{crumb.label}</span>
+        )}
+        {i < crumbs.length - 1 && <span class="separator" aria-hidden="true">/</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<style>
+  .breadcrumbs {
+    margin-bottom: var(--space-6);
+  }
+
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+
+  .breadcrumbs a {
+    color: var(--color-text-tertiary);
+    text-decoration: none;
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--color-link);
+  }
+
+  .breadcrumbs span[aria-current] {
+    color: var(--color-text-secondary);
+  }
+
+  .separator {
+    color: var(--color-border);
+  }
+</style>

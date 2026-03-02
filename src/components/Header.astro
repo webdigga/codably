@@ -1,0 +1,262 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { categories } from '../data/categories';
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-name">CRM Beat</a>
+
+    <nav class="nav-desktop" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/start-here">Start Here</a>
+      <div class="dropdown">
+        <button class="dropdown-trigger" type="button" aria-expanded="false" aria-haspopup="true">
+          Categories
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 4 6 8 10 4"></polyline></svg>
+        </button>
+        <div class="dropdown-menu" role="menu">
+          {categories.map((cat) => (
+            <a href={`/${cat.slug}`} role="menuitem">{cat.name}</a>
+          ))}
+        </div>
+      </div>
+      <a href="/about">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <ThemeToggle />
+      <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
+        <svg class="hamburger-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg class="hamburger-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="nav-mobile" aria-label="Mobile navigation">
+    <a href="/">Home</a>
+    <a href="/start-here">Start Here</a>
+    {categories.map((cat) => (
+      <a href={`/${cat.slug}`}>{cat.name}</a>
+    ))}
+    <a href="/about">About</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    height: 56px;
+  }
+
+  .site-name {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .site-name:hover {
+    color: var(--color-text);
+  }
+
+  /* Desktop nav */
+  .nav-desktop {
+    display: none;
+    align-items: center;
+    gap: var(--space-6);
+    margin-left: auto;
+  }
+
+  .nav-desktop a {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    line-height: 1;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+  }
+
+  .nav-desktop a:hover {
+    color: var(--color-text);
+  }
+
+  /* Dropdown */
+  .dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .dropdown-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    line-height: 1;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    vertical-align: middle;
+  }
+
+  .dropdown-trigger svg {
+    flex-shrink: 0;
+  }
+
+  .dropdown-trigger:hover {
+    color: var(--color-text);
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-2);
+    z-index: var(--z-dropdown);
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+  }
+
+  .dropdown-menu a:hover {
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+  }
+
+  /* Actions */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-left: auto;
+  }
+
+  .hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  .hamburger-close {
+    display: none;
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger-open {
+    display: none;
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger-close {
+    display: block;
+  }
+
+  /* Mobile nav */
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    padding: var(--space-4);
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .nav-mobile.open {
+    display: flex;
+  }
+
+  .nav-mobile a {
+    padding: var(--space-3) 0;
+    font-size: var(--text-base);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .nav-mobile a:hover {
+    color: var(--color-text);
+  }
+
+  @media (min-width: 768px) {
+    .nav-desktop {
+      display: flex;
+    }
+
+    .header-actions {
+      margin-left: var(--space-6);
+    }
+
+    .hamburger {
+      display: none;
+    }
+
+    .nav-mobile {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  // Hamburger toggle
+  const hamburger = document.querySelector('.hamburger');
+  const mobileNav = document.querySelector('.nav-mobile');
+
+  hamburger?.addEventListener('click', () => {
+    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', String(!expanded));
+    mobileNav?.classList.toggle('open');
+  });
+
+  // Dropdown toggle
+  const dropdownTrigger = document.querySelector('.dropdown-trigger');
+  const dropdown = document.querySelector('.dropdown');
+
+  dropdownTrigger?.addEventListener('click', () => {
+    dropdown?.classList.toggle('open');
+    const expanded = dropdownTrigger.getAttribute('aria-expanded') === 'true';
+    dropdownTrigger.setAttribute('aria-expanded', String(!expanded));
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!dropdown?.contains(e.target as Node)) {
+      dropdown?.classList.remove('open');
+      dropdownTrigger?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>

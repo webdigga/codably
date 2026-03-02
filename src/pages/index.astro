@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CategoryTabs from '../components/CategoryTabs.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const articles = allArticles.sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'CRM Beat',
+    url: 'https://crmbeat.com',
+    description: 'Practical CRM strategy for small UK businesses.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'CRM Beat',
+    url: 'https://crmbeat.com',
+    sameAs: [],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: articles.slice(0, 10).map((article, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `https://crmbeat.com/${article.data.category}/${article.id}`,
+    })),
+  },
+];
+---
+
+<BaseLayout
+  title="CRM Beat"
+  description="Practical CRM strategy for small UK businesses. Honest advice, no jargon, real results."
+  schemas={schemas}
+>
+  <section class="container homepage">
+    <div class="homepage-header">
+      <h1>CRM strategy that works</h1>
+      <p>Practical advice for small UK businesses. No jargon, no fluff.</p>
+    </div>
+
+    <CategoryTabs />
+
+    <div class="article-grid">
+      {articles.map((article) => (
+        <ArticleCard
+          title={article.data.title}
+          description={article.data.description}
+          slug={article.id}
+          category={article.data.category}
+          author={article.data.author}
+          publishDate={article.data.publishDate}
+          wordCount={article.body ? article.body.split(/\s+/).length : 0}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .homepage {
+    padding-top: var(--space-12);
+    padding-bottom: var(--space-16);
+  }
+
+  .homepage-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .homepage-header h1 {
+    margin-bottom: var(--space-3);
+  }
+
+  .homepage-header p {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+  }
+
+  .article-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .article-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .article-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

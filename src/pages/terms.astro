@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const crumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Terms of Use' },
+];
+---
+
+<BaseLayout
+  title="Terms of Use"
+  description="CRM Beat terms of use. The rules and conditions governing your use of this website."
+>
+  <section class="container legal-page">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <div class="prose">
+      <h1>Terms of use</h1>
+      <p><em>Last updated: 2 March 2026</em></p>
+
+      <h2>About this site</h2>
+      <p>CRM Beat (crmbeat.com) is an editorial website providing articles and information about CRM strategy for small businesses. The site is operated by David White.</p>
+
+      <h2>Use of content</h2>
+      <p>All content on CRM Beat is provided for informational purposes only. You may read, share, and link to our articles freely. You may not reproduce, republish, or redistribute our content without written permission.</p>
+
+      <h2>No professional advice</h2>
+      <p>The content on this site does not constitute professional business, legal, or financial advice. While we aim for accuracy, we recommend consulting a qualified professional before making business decisions based on our articles.</p>
+
+      <h2>Accuracy</h2>
+      <p>We make every effort to ensure the information on CRM Beat is accurate and up to date. However, we cannot guarantee that all content is error-free. If you spot an inaccuracy, please let us know at hello@crmbeat.com.</p>
+
+      <h2>External links</h2>
+      <p>Our site contains links to third-party websites. We are not responsible for the content, accuracy, or practices of those sites. Links do not imply endorsement unless explicitly stated.</p>
+
+      <h2>Affiliate and commercial relationships</h2>
+      <p>CRM Beat carries advertising for Kabooly CRM, a product founded by the site's editor. This relationship is disclosed on our <a href="/about">About page</a>. Editorial content is not influenced by this commercial relationship.</p>
+
+      <h2>Intellectual property</h2>
+      <p>All original content, design, and branding on CRM Beat is the property of the site's operator. The CRM Beat name and logo are trademarks.</p>
+
+      <h2>Limitation of liability</h2>
+      <p>To the fullest extent permitted by law, CRM Beat and its operator accept no liability for any loss or damage arising from your use of this site or reliance on its content.</p>
+
+      <h2>Governing law</h2>
+      <p>These terms are governed by the laws of England and Wales.</p>
+
+      <h2>Changes to these terms</h2>
+      <p>We may update these terms from time to time. Continued use of the site after changes are published constitutes acceptance of the updated terms.</p>
+
+      <h2>Contact</h2>
+      <p>If you have questions about these terms, contact us at hello@crmbeat.com.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-16);
+  }
+
+  .legal-page .prose {
+    max-width: var(--content-width);
+  }
+</style>

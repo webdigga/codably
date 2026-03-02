@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryTabs from '../../components/CategoryTabs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { categories } from '../../data/categories';
+
+export function getStaticPaths() {
+  return categories.map((cat) => ({
+    params: { category: cat.slug },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const articles = allArticles
+  .filter((a) => a.data.category === category.slug)
+  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+
+const crumbs = [
+  { label: 'Home', href: '/' },
+  { label: category.name },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: category.name,
+    description: category.description,
+    url: `https://crmbeat.com/${category.slug}`,
+  },
+];
+---
+
+<BaseLayout
+  title={`${category.name} Articles`}
+  description={category.description}
+  schemas={schemas}
+>
+  <section class="container category-page">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <div class="category-header">
+      <h1>{category.name}</h1>
+      <p>{category.description}</p>
+    </div>
+
+    <CategoryTabs activeCategory={category.slug} />
+
+    {articles.length > 0 ? (
+      <div class="article-grid">
+        {articles.map((article) => (
+          <ArticleCard
+            title={article.data.title}
+            description={article.data.description}
+            slug={article.id}
+            category={article.data.category}
+            author={article.data.author}
+            publishDate={article.data.publishDate}
+            wordCount={article.body ? article.body.split(/\s+/).length : 0}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="no-articles">No articles in this category yet. Check back soon!</p>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .category-page {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-16);
+  }
+
+  .category-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .category-header h1 {
+    margin-bottom: var(--space-3);
+  }
+
+  .category-header p {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: var(--content-width);
+  }
+
+  .article-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .article-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .article-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .no-articles {
+    color: var(--color-text-secondary);
+    font-size: var(--text-lg);
+    text-align: center;
+    padding: var(--space-16) 0;
+  }
+</style>

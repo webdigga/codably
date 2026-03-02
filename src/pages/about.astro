@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { authors } from '../data/authors';
+
+const david = authors['david-white'];
+
+const crumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'About' },
+];
+---
+
+<BaseLayout
+  title="About CRM Beat"
+  description="CRM Beat is an independent editorial site covering CRM strategy for small UK businesses, edited by David White."
+>
+  <section class="container about-page">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <div class="about-content prose">
+      <h1>About CRM Beat</h1>
+
+      <p>CRM Beat is an independent editorial site dedicated to practical CRM strategy for small UK businesses. We believe every business, no matter how small, deserves access to clear, jargon-free advice on managing client relationships effectively.</p>
+
+      <h2>Our mission</h2>
+
+      <p>We publish honest, experience-driven articles about choosing, setting up, and getting the most from your CRM. Whether you are a sole trader, a small team, or a growing business, our content is written to help you work smarter and keep your clients happy.</p>
+
+      <p>Every article on CRM Beat is grounded in real experience. We do not publish generic listicles or recycled advice. Our goal is to give you strategies you can act on today.</p>
+
+      <h2>Who writes CRM Beat?</h2>
+
+      <div class="author-card">
+        <div class="author-info">
+          <h3>{david.name}</h3>
+          <p class="author-role">{david.role}</p>
+          <p>{david.bio}</p>
+          <a href={david.linkedin} target="_blank" rel="noopener noreferrer">
+            Connect on LinkedIn
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-left:2px"><path d="M9 3L3 9"/><path d="M4 3h5v5"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-page {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-16);
+  }
+
+  .about-content {
+    max-width: var(--content-width);
+  }
+
+  .author-card {
+    display: flex;
+    gap: var(--space-6);
+    padding: var(--space-6);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    margin-block: var(--space-6);
+  }
+
+  .author-info h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-1);
+  }
+
+  .author-role {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-3);
+  }
+
+  .author-info p {
+    margin-bottom: var(--space-3);
+  }
+
+  .author-info a {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+  }
+</style>

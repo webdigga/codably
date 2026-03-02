@@ -1,0 +1,127 @@
+---
+import { categories } from '../data/categories';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>Categories</h3>
+        <ul>
+          {categories.map((cat) => (
+            <li><a href={`/${cat.slug}`}>{cat.name}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Pages</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/start-here">Start Here</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Use</a></li>
+          <li><a href="/rss.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>About CRM Beat</h3>
+        <p>Practical CRM strategy for small UK businesses. Honest advice, no jargon, real results.</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} CRM Beat. All rights reserved.</p>
+      <p>
+        Built by
+        <a href="https://kabooly.com?utm_source=crmbeat&utm_medium=footer&utm_campaign=editorial" target="_blank" rel="noopener noreferrer">
+          Kabooly
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-left:2px"><path d="M9 3L3 9"/><path d="M4 3h5v5"/></svg>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-16);
+    padding: var(--space-12) 0 var(--space-8);
+    border-top: none;
+    background: #111827;
+    color: #9ca3af;
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  .footer-col h3 {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #e5e7eb;
+    margin-bottom: var(--space-4);
+  }
+
+  .footer-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-col li {
+    margin-bottom: var(--space-2);
+  }
+
+  .footer-col a {
+    font-size: var(--text-sm);
+    color: #9ca3af;
+    text-decoration: none;
+  }
+
+  .footer-col a:hover {
+    color: #ffffff;
+  }
+
+  .footer-col p {
+    font-size: var(--text-sm);
+    color: #9ca3af;
+    line-height: var(--leading-relaxed);
+  }
+
+  .footer-bottom {
+    margin-top: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid #1f2937;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+
+  .footer-bottom p {
+    font-size: var(--text-xs);
+    color: #6b7280;
+  }
+
+  .footer-bottom a {
+    color: #9ca3af;
+    text-decoration: none;
+  }
+
+  .footer-bottom a:hover {
+    color: #ffffff;
+  }
+</style>

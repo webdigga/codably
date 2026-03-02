@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+const crumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'Privacy Policy' },
+];
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="CRM Beat privacy policy. How we handle your data and protect your privacy."
+>
+  <section class="container legal-page">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <div class="prose">
+      <h1>Privacy policy</h1>
+      <p><em>Last updated: 2 March 2026</em></p>
+
+      <h2>Who we are</h2>
+      <p>CRM Beat (crmbeat.com) is an editorial website operated by David White. Our contact email is hello@crmbeat.com.</p>
+
+      <h2>What data we collect</h2>
+      <p>CRM Beat is a static website. We do not use cookies for tracking, and we do not collect personal data through forms or user accounts.</p>
+      <p>We may collect anonymised analytics data (such as page views and referral sources) using privacy-respecting analytics tools. This data cannot be used to identify individual visitors.</p>
+
+      <h2>Third-party services</h2>
+      <p>Our site may use the following third-party services:</p>
+      <ul>
+        <li><strong>Google Fonts:</strong> We load fonts from Google Fonts, which may log your IP address. See <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's privacy policy <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-left:2px"><path d="M9 3L3 9"/><path d="M4 3h5v5"/></svg></a> for details.</li>
+        <li><strong>Cloudflare Pages:</strong> Our hosting provider may collect standard server logs. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare's privacy policy <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-left:2px"><path d="M9 3L3 9"/><path d="M4 3h5v5"/></svg></a> for details.</li>
+      </ul>
+
+      <h2>External links</h2>
+      <p>This site contains links to external websites, including Kabooly CRM. We are not responsible for the privacy practices of those sites. We encourage you to read their privacy policies.</p>
+
+      <h2>Your rights</h2>
+      <p>Under UK data protection law (UK GDPR), you have rights including the right to access, correct, or delete any personal data we hold. Since we do not collect personal data, these rights are unlikely to apply, but you are welcome to contact us with any questions.</p>
+
+      <h2>Changes to this policy</h2>
+      <p>We may update this privacy policy from time to time. Any changes will be posted on this page with an updated date.</p>
+
+      <h2>Contact</h2>
+      <p>If you have questions about this privacy policy, contact us at hello@crmbeat.com.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-16);
+  }
+
+  .legal-page .prose {
+    max-width: var(--content-width);
+  }
+</style>
