@@ -1,0 +1,78 @@
+---
+---
+
+<div class="search-bar">
+  <svg class="search-bar-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="9" cy="9" r="6"></circle>
+    <line x1="13.5" y1="13.5" x2="18" y2="18"></line>
+  </svg>
+  <input
+    type="search"
+    class="search-bar-input"
+    placeholder="Search articles..."
+    autocomplete="off"
+  />
+</div>
+
+<script>
+  const barInput = document.querySelector('.search-bar-input') as HTMLInputElement;
+  let barTimer: ReturnType<typeof setTimeout>;
+
+  function navigate(query: string) {
+    const q = query.trim();
+    if (q.length >= 3) {
+      window.location.href = `/search?q=${encodeURIComponent(q)}`;
+    }
+  }
+
+  barInput?.addEventListener('input', () => {
+    clearTimeout(barTimer);
+    barTimer = setTimeout(() => navigate(barInput.value), 400);
+  });
+
+  barInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      clearTimeout(barTimer);
+      navigate(barInput.value);
+    }
+  });
+</script>
+
+<style>
+  .search-bar {
+    position: relative;
+    margin-bottom: var(--space-8);
+  }
+
+  .search-bar-icon {
+    position: absolute;
+    left: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-tertiary);
+    pointer-events: none;
+  }
+
+  .search-bar-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4) var(--space-3) var(--space-12);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .search-bar-input:focus {
+    border-color: var(--color-text-secondary);
+    box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.15);
+  }
+
+  .search-bar-input::placeholder {
+    color: var(--color-text-tertiary);
+  }
+</style>

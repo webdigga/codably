@@ -6,13 +6,29 @@ export interface Props {
   ogImage?: string;
   ogType?: string;
   schemas?: object[];
+  prevUrl?: string;
+  nextUrl?: string;
+  noindex?: boolean;
 }
 
-const { title, description, canonical, ogImage, ogType = 'website', schemas = [] } = Astro.props;
+const { title, description, canonical, ogImage, ogType = 'website', schemas = [], prevUrl, nextUrl, noindex = false } = Astro.props;
 
 const siteTitle = 'CRM Beat';
+const siteUrl = 'https://crmbeat.com';
+const defaultOgImage = `${siteUrl}/images/og-default.jpg`;
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
-const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
+
+// Clean pathname: strip .html, ensure no trailing slash (except root)
+function cleanPath(pathname: string): string {
+  let path = pathname;
+  if (path.endsWith('.html')) path = path.slice(0, -5);
+  if (path.endsWith('/index')) path = path.slice(0, -6) || '/';
+  if (path.length > 1 && path.endsWith('/')) path = path.slice(0, -1);
+  return path;
+}
+
+const canonicalUrl = canonical || `${siteUrl}${cleanPath(Astro.url.pathname)}`;
+const resolvedOgImage = ogImage || defaultOgImage;
 ---
 
 <meta charset="utf-8" />
@@ -20,13 +36,22 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalUrl} />
+{noindex && <meta name="robots" content="noindex, follow" />}
+{prevUrl && <link rel="prev" href={new URL(prevUrl, Astro.site).href} />}
+{nextUrl && <link rel="next" href={new URL(nextUrl, Astro.site).href} />}
 
 <!-- Favicon -->
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="CRM Beat" />
+<link rel="manifest" href="/site.webmanifest" />
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <!-- RSS -->
@@ -37,7 +62,7 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 <meta property="og:description" content={description} />
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonicalUrl} />
-{ogImage && <meta property="og:image" content={ogImage} />}
+<meta property="og:image" content={resolvedOgImage} />
 <meta property="og:site_name" content={siteTitle} />
 <meta property="og:locale" content="en_GB" />
 
@@ -45,7 +70,7 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).href;
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={fullTitle} />
 <meta name="twitter:description" content={description} />
-{ogImage && <meta name="twitter:image" content={ogImage} />}
+<meta name="twitter:image" content={resolvedOgImage} />
 
 <!-- JSON-LD -->
 {schemas.map((schema) => (

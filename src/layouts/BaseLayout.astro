@@ -12,9 +12,12 @@ export interface Props {
   ogImage?: string;
   ogType?: string;
   schemas?: object[];
+  prevUrl?: string;
+  nextUrl?: string;
+  noindex?: boolean;
 }
 
-const { title, description, canonical, ogImage, ogType, schemas } = Astro.props;
+const { title, description, canonical, ogImage, ogType, schemas, prevUrl, nextUrl, noindex } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,6 +30,9 @@ const { title, description, canonical, ogImage, ogType, schemas } = Astro.props;
       ogImage={ogImage}
       ogType={ogType}
       schemas={schemas}
+      prevUrl={prevUrl}
+      nextUrl={nextUrl}
+      noindex={noindex}
     />
     <script is:inline>
       (function () {

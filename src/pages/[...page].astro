@@ -2,12 +2,21 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CategoryTabs from '../components/CategoryTabs.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import Pagination from '../components/Pagination.astro';
+import SearchBar from '../components/SearchBar.astro';
 import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
 
-const allArticles = await getCollection('articles', ({ data }) => !data.draft);
-const articles = allArticles.sort(
-  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
-);
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+  const articles = allArticles.sort(
+    (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+  );
+  return paginate(articles, { pageSize: 9 });
+};
+
+const { page } = Astro.props;
+const pageTitle = page.currentPage > 1 ? `Page ${page.currentPage}` : 'CRM Beat';
 
 const schemas = [
   {
@@ -16,6 +25,14 @@ const schemas = [
     name: 'CRM Beat',
     url: 'https://crmbeat.com',
     description: 'Practical CRM strategy for small UK businesses.',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://crmbeat.com/search?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
   },
   {
     '@context': 'https://schema.org',
@@ -27,19 +44,24 @@ const schemas = [
   {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    itemListElement: articles.slice(0, 10).map((article, i) => ({
+    itemListElement: page.data.slice(0, 10).map((article: any, i: number) => ({
       '@type': 'ListItem',
       position: i + 1,
       url: `https://crmbeat.com/${article.data.category}/${article.id}`,
     })),
   },
 ];
+
+const prevUrl = page.url.prev || undefined;
+const nextUrl = page.url.next || undefined;
 ---
 
 <BaseLayout
-  title="CRM Beat"
+  title={pageTitle}
   description="Practical CRM strategy for small UK businesses. Honest advice, no jargon, real results."
   schemas={schemas}
+  prevUrl={prevUrl}
+  nextUrl={nextUrl}
 >
   <section class="container homepage">
     <div class="homepage-header">
@@ -47,10 +69,12 @@ const schemas = [
       <p>Practical advice for small UK businesses. No jargon, no fluff.</p>
     </div>
 
+    <SearchBar />
+
     <CategoryTabs />
 
     <div class="article-grid">
-      {articles.map((article) => (
+      {page.data.map((article: any) => (
         <ArticleCard
           title={article.data.title}
           description={article.data.description}
@@ -62,6 +86,8 @@ const schemas = [
         />
       ))}
     </div>
+
+    <Pagination page={page} baseUrl="" />
   </section>
 </BaseLayout>
 

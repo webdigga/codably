@@ -40,6 +40,7 @@ const schemas = [
     headline: article.data.title,
     description: article.data.description,
     datePublished: article.data.publishDate,
+    dateModified: article.data.dateModified || article.data.publishDate,
     author: {
       '@type': 'Person',
       name: authorData.name,

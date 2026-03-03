@@ -3,27 +3,38 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import CategoryTabs from '../../components/CategoryTabs.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Pagination from '../../components/Pagination.astro';
+import SearchBar from '../../components/SearchBar.astro';
 import { getCollection } from 'astro:content';
 import { categories } from '../../data/categories';
+import type { GetStaticPaths } from 'astro';
 
-export function getStaticPaths() {
-  return categories.map((cat) => ({
-    params: { category: cat.slug },
-    props: { category: cat },
-  }));
-}
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allArticles = await getCollection('articles', ({ data }) => !data.draft);
 
-const { category } = Astro.props;
+  return categories.flatMap((cat) => {
+    const filtered = allArticles
+      .filter((a) => a.data.category === cat.slug)
+      .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
 
-const allArticles = await getCollection('articles', ({ data }) => !data.draft);
-const articles = allArticles
-  .filter((a) => a.data.category === category.slug)
-  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+    return paginate(filtered, {
+      params: { category: cat.slug },
+      props: { category: cat },
+      pageSize: 9,
+    });
+  });
+};
+
+const { page, category } = Astro.props;
 
 const crumbs = [
   { label: 'Home', href: '/' },
   { label: category.name },
 ];
+
+const categoryTitle = page.currentPage > 1
+  ? `${category.name} Articles - Page ${page.currentPage}`
+  : `${category.name} Articles`;
 
 const schemas = [
   {
@@ -33,13 +44,27 @@ const schemas = [
     description: category.description,
     url: `https://crmbeat.com/${category.slug}`,
   },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: page.data.map((article: any, i: number) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `https://crmbeat.com/${article.data.category}/${article.id}`,
+    })),
+  },
 ];
+
+const prevUrl = page.url.prev || undefined;
+const nextUrl = page.url.next || undefined;
 ---
 
 <BaseLayout
-  title={`${category.name} Articles`}
+  title={categoryTitle}
   description={category.description}
   schemas={schemas}
+  prevUrl={prevUrl}
+  nextUrl={nextUrl}
 >
   <section class="container category-page">
     <Breadcrumbs crumbs={crumbs} />
@@ -49,11 +74,13 @@ const schemas = [
       <p>{category.description}</p>
     </div>
 
+    <SearchBar />
+
     <CategoryTabs activeCategory={category.slug} />
 
-    {articles.length > 0 ? (
+    {page.data.length > 0 ? (
       <div class="article-grid">
-        {articles.map((article) => (
+        {page.data.map((article: any) => (
           <ArticleCard
             title={article.data.title}
             description={article.data.description}
@@ -68,6 +95,8 @@ const schemas = [
     ) : (
       <p class="no-articles">No articles in this category yet. Check back soon!</p>
     )}
+
+    <Pagination page={page} baseUrl={`/${category.slug}`} />
   </section>
 </BaseLayout>
 

@@ -7,6 +7,7 @@ const articles = defineCollection({
     title: z.string(),
     description: z.string().max(160),
     publishDate: z.string(),
+    dateModified: z.string().optional(),
     author: z.string(),
     category: z.enum([
       'getting-started',

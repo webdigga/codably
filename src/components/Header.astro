@@ -5,7 +5,10 @@ import { categories } from '../data/categories';
 
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/" class="site-name">CRM Beat</a>
+    <a href="/" class="site-name">
+      <svg class="site-name-pulse" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e85d3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="2 12 6 12 9 4 12 20 15 8 18 12 22 12"></polyline></svg>
+      <span>CRM</span> <span class="site-name-beat">Beat</span>
+    </a>
 
     <nav class="nav-desktop" aria-label="Main navigation">
       <a href="/">Home</a>
@@ -25,6 +28,9 @@ import { categories } from '../data/categories';
     </nav>
 
     <div class="header-actions">
+      <a href="/search" class="search-link" aria-label="Search articles">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="9" r="6"></circle><line x1="13.5" y1="13.5" x2="18" y2="18"></line></svg>
+      </a>
       <ThemeToggle />
       <button class="hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
         <svg class="hamburger-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
@@ -40,6 +46,7 @@ import { categories } from '../data/categories';
       <a href={`/${cat.slug}`}>{cat.name}</a>
     ))}
     <a href="/about">About</a>
+    <a href="/search">Search</a>
   </nav>
 </header>
 
@@ -59,6 +66,9 @@ import { categories } from '../data/categories';
   }
 
   .site-name {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
     font-size: var(--text-xl);
     font-weight: var(--weight-bold);
     color: var(--color-text);
@@ -68,6 +78,14 @@ import { categories } from '../data/categories';
 
   .site-name:hover {
     color: var(--color-text);
+  }
+
+  .site-name-pulse {
+    flex-shrink: 0;
+  }
+
+  .site-name-beat {
+    color: #e85d3a;
   }
 
   /* Desktop nav */
@@ -152,6 +170,24 @@ import { categories } from '../data/categories';
   .dropdown-menu a:hover {
     background: var(--color-bg-alt);
     color: var(--color-text);
+  }
+
+  /* Search link */
+  .search-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .search-link:hover {
+    color: var(--color-text);
+    background: var(--color-bg-alt);
   }
 
   /* Actions */
