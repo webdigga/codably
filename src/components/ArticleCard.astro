@@ -11,9 +11,10 @@ export interface Props {
   publishDate: string;
   wordCount?: number;
   headingLevel?: 2 | 3;
+  dataSlug?: string;
 }
 
-const { title, description, slug, category, author, publishDate, wordCount = 0, headingLevel = 2 } = Astro.props;
+const { title, description, slug, category, author, publishDate, wordCount = 0, headingLevel = 2, dataSlug } = Astro.props;
 const Heading = `h${headingLevel}` as any;
 
 const cat = categories.find((c) => c.slug === category);
@@ -26,7 +27,7 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
 });
 ---
 
-<article class="card article-card">
+<article class="card article-card" data-slug={dataSlug}>
   <a href={`/${category}/${slug}`} class="article-card-link">
     {cat && (
       <span class="article-card-category">
