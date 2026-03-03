@@ -10,9 +10,11 @@ export interface Props {
   author: string;
   publishDate: string;
   wordCount?: number;
+  headingLevel?: 2 | 3;
 }
 
-const { title, description, slug, category, author, publishDate, wordCount = 0 } = Astro.props;
+const { title, description, slug, category, author, publishDate, wordCount = 0, headingLevel = 2 } = Astro.props;
+const Heading = `h${headingLevel}` as any;
 
 const cat = categories.find((c) => c.slug === category);
 const authorName = authors[author]?.name || author;
@@ -31,7 +33,7 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
         {cat.name}
       </span>
     )}
-    <h3 class="article-card-title">{title}</h3>
+    <Heading class="article-card-title">{title}</Heading>
     <p class="article-card-excerpt">{description}</p>
     <div class="article-card-meta">
       <span>{authorName}</span>
@@ -74,6 +76,7 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
     line-height: var(--leading-tight);
     color: var(--color-text);
     transition: color var(--transition-fast);
+    margin: 0;
   }
 
   .article-card-link:hover .article-card-title {

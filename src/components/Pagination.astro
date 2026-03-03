@@ -92,7 +92,9 @@ const pages = Array.from({ length: lastPage }, (_, i) => i + 1);
   }
 
   .pagination-btn.disabled {
-    opacity: 0.4;
+    color: var(--color-text-tertiary);
+    border-color: var(--color-border-light);
+    text-decoration: line-through;
     cursor: default;
   }
 

@@ -33,6 +33,7 @@ const { articles } = Astro.props;
           author={article.data.author}
           publishDate={article.data.publishDate}
           wordCount={article.body ? article.body.split(/\s+/).length : 0}
+          headingLevel={3}
         />
       ))}
     </div>
