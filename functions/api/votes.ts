@@ -1,3 +1,4 @@
+// KV binding configured in Cloudflare Pages dashboard (not wrangler.toml)
 interface Env {
   VOTES: KVNamespace;
 }
