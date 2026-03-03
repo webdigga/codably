@@ -1,0 +1,6 @@
+name = "crmbeat"
+pages_build_output_dir = "dist"
+
+[[kv_namespaces]]
+binding = "VOTES"
+id = "placeholder-create-in-dashboard"

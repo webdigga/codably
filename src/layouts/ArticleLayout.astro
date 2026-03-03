@@ -4,6 +4,7 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 
 import TableOfContents from '../components/TableOfContents.astro';
 import FAQSection from '../components/FAQSection.astro';
+import FeedbackButtons from '../components/FeedbackButtons.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { categories } from '../data/categories';
@@ -15,6 +16,7 @@ export interface Props {
   publishDate: string;
   author: string;
   category: string;
+  slug: string;
   tags: string[];
   headings: { depth: number; slug: string; text: string }[];
   faqs?: { question: string; answer: string }[];
@@ -29,6 +31,7 @@ const {
   publishDate,
   author,
   category,
+  slug,
   tags,
   headings,
   faqs = [],
@@ -86,6 +89,8 @@ const crumbs = [
         </div>
 
         {faqs.length > 0 && <FAQSection faqs={faqs} />}
+
+        <FeedbackButtons slug={slug} />
 
         <ShareButtons title={title} url={url} />
       </div>
