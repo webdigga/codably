@@ -14,4 +14,11 @@ export const authors: Record<string, Author> = {
     avatar: '/images/authors/david-white.avif',
     linkedin: 'https://www.linkedin.com/in/david-white-96a0878a/',
   },
+  'jonny-rowse': {
+    name: 'Jonny Rowse',
+    role: 'Editor, CRM Beat',
+    bio: 'Jonny is a digital strategist with a passion for helping small businesses streamline their operations. He writes about practical CRM tactics that drive real results without the jargon.',
+    avatar: '/images/authors/jonny-rowse.avif',
+    linkedin: 'https://www.linkedin.com/in/jonny-rowse-70a09126/',
+  },
 };

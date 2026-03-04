@@ -18,7 +18,9 @@ const { title, description, slug, category, author, publishDate, wordCount = 0, 
 const Heading = `h${headingLevel}` as any;
 
 const cat = categories.find((c) => c.slug === category);
-const authorName = authors[author]?.name || author;
+const authorData = authors[author];
+const authorName = authorData?.name || author;
+const authorAvatar = authorData?.avatar;
 const readingTime = Math.max(1, Math.ceil(wordCount / 230));
 const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
   day: 'numeric',
@@ -37,6 +39,9 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
     <Heading class="article-card-title">{title}</Heading>
     <p class="article-card-excerpt">{description}</p>
     <div class="article-card-meta">
+      {authorAvatar && (
+        <img src={authorAvatar} alt={authorName} class="article-card-avatar" width="20" height="20" loading="lazy" />
+      )}
       <span>{authorName}</span>
       <span class="meta-separator">&middot;</span>
       <time datetime={publishDate}>{dateFormatted}</time>
@@ -101,6 +106,13 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
     gap: var(--space-2);
     font-size: var(--text-xs);
     color: var(--color-text-tertiary);
+  }
+
+  .article-card-avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 
   .meta-separator {

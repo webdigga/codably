@@ -2,7 +2,7 @@
 title: "Scaling Your Business Without Losing the Personal Touch"
 description: "How to grow your business while keeping the personal relationships that won you clients in the first place."
 publishDate: "2026-02-22"
-author: "david-white"
+author: "jonny-rowse"
 category: "business-growth"
 tags: ["business growth", "scaling", "personal service"]
 featured: false

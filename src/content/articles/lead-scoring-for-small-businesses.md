@@ -2,7 +2,7 @@
 title: "Lead Scoring for Small Businesses"
 description: "A practical introduction to lead scoring for small businesses, helping you prioritise the leads most likely to become paying clients."
 publishDate: "2026-02-19"
-author: "david-white"
+author: "jonny-rowse"
 category: "sales-pipeline"
 tags: ["lead scoring", "sales pipeline", "lead management"]
 featured: false

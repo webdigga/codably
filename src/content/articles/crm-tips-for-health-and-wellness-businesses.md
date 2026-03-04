@@ -2,7 +2,7 @@
 title: "CRM Tips for Health and Wellness Businesses"
 description: "Practical CRM advice for personal trainers, therapists, nutritionists, and other health and wellness professionals."
 publishDate: "2026-03-02"
-author: "david-white"
+author: "jonny-rowse"
 category: "industry-tips"
 tags: ["health and wellness", "industry tips", "business"]
 featured: false

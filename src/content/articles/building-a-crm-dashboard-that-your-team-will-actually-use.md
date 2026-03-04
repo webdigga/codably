@@ -2,7 +2,7 @@
 title: "Building a CRM Dashboard That Your Team Will Actually Use"
 description: "How to set up a CRM dashboard that shows the numbers that matter, without the clutter that makes people stop looking."
 publishDate: "2026-03-03"
-author: "david-white"
+author: "jonny-rowse"
 category: "data-reporting"
 tags: ["CRM dashboard", "data reporting", "small business"]
 featured: false

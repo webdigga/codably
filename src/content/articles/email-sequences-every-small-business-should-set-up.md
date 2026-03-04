@@ -2,7 +2,7 @@
 title: "Email Sequences Every Small Business Should Set Up"
 description: "Four essential email sequences that every small business should automate in their CRM to nurture leads and retain clients."
 publishDate: "2026-02-14"
-author: "david-white"
+author: "jonny-rowse"
 category: "marketing-automation"
 tags: ["email automation", "email sequences", "marketing automation"]
 featured: false

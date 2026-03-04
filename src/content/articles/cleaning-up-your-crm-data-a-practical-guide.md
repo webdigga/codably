@@ -2,7 +2,7 @@
 title: "Cleaning Up Your CRM Data: A Practical Guide"
 description: "A step-by-step guide to cleaning up messy CRM data, from duplicate contacts to outdated records, so your CRM actually works for you."
 publishDate: "2026-02-24"
-author: "david-white"
+author: "jonny-rowse"
 category: "data-reporting"
 tags: ["CRM data", "data quality", "CRM maintenance"]
 featured: false
