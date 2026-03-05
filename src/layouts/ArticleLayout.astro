@@ -6,6 +6,7 @@ import TableOfContents from '../components/TableOfContents.astro';
 import FAQSection from '../components/FAQSection.astro';
 import FeedbackButtons from '../components/FeedbackButtons.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+import ArticleComments from '../components/ArticleComments.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { categories } from '../data/categories';
 import { authors } from '../data/authors';
@@ -111,6 +112,8 @@ const crumbs = [
         <FeedbackButtons slug={slug} />
 
         <ShareButtons title={title} url={url} />
+
+        <ArticleComments slug={slug} />
       </div>
 
       <aside class="article-sidebar">

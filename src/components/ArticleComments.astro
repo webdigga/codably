@@ -1,0 +1,363 @@
+---
+export interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<section class="article-comments" data-slug={slug}>
+  <h2 class="comments-heading">Comments</h2>
+
+  <form class="comment-form" novalidate>
+    <div class="form-group">
+      <label for="comment-name">Name</label>
+      <input type="text" id="comment-name" name="name" required maxlength="50" placeholder="Your name" />
+    </div>
+
+    <div class="form-group">
+      <label for="comment-body">Comment</label>
+      <textarea id="comment-body" name="body" required maxlength="1000" rows="4" placeholder="Share your thoughts..."></textarea>
+      <span class="char-count"><span class="char-current">0</span>/1000</span>
+    </div>
+
+    <div class="honeypot" aria-hidden="true" tabindex="-1">
+      <label for="comment-website">Website</label>
+      <input type="text" id="comment-website" name="website" autocomplete="off" tabindex="-1" />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Post comment</button>
+      <span class="form-message"></span>
+    </div>
+  </form>
+
+  <div class="comments-list">
+    <p class="comments-empty">No comments yet. Be the first to share your thoughts.</p>
+  </div>
+</section>
+
+<style>
+  .article-comments {
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+  }
+
+  .comments-heading {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-6);
+  }
+
+  .comment-form {
+    margin-bottom: var(--space-8);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-4);
+  }
+
+  .form-group label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .char-count {
+    display: block;
+    text-align: right;
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    margin-top: var(--space-1);
+  }
+
+  .char-count.near-limit {
+    color: var(--color-warning, #d97706);
+  }
+
+  .char-count.at-limit {
+    color: var(--color-error, #dc2626);
+  }
+
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .form-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .form-message {
+    font-size: var(--text-sm);
+  }
+
+  .form-message.success {
+    color: var(--color-success, #16a34a);
+  }
+
+  .form-message.error {
+    color: var(--color-error, #dc2626);
+  }
+
+  .comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .comments-empty {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    font-style: italic;
+  }
+
+  .comment {
+    padding: var(--space-4);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+  }
+
+  .comment-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+  }
+
+  .comment-author {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: var(--color-text);
+  }
+
+  .comment-time {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+  }
+
+  .comment-body {
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--color-text-secondary);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.article-comments').forEach((section) => {
+    const slug = section.getAttribute('data-slug');
+    if (!slug) return;
+
+    const form = section.querySelector('.comment-form') as HTMLFormElement;
+    const nameInput = section.querySelector('#comment-name') as HTMLInputElement;
+    const bodyInput = section.querySelector('#comment-body') as HTMLTextAreaElement;
+    const websiteInput = section.querySelector('#comment-website') as HTMLInputElement;
+    const charCurrent = section.querySelector('.char-current') as HTMLElement;
+    const charCount = section.querySelector('.char-count') as HTMLElement;
+    const submitBtn = section.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const formMessage = section.querySelector('.form-message') as HTMLElement;
+    const commentsList = section.querySelector('.comments-list') as HTMLElement;
+
+    function relativeTime(dateStr: string): string {
+      const now = Date.now();
+      const then = new Date(dateStr).getTime();
+      const diff = Math.floor((now - then) / 1000);
+
+      if (diff < 5) return 'just now';
+      if (diff < 60) return `${diff}s ago`;
+      const mins = Math.floor(diff / 60);
+      if (mins < 60) return `${mins}m ago`;
+      const hours = Math.floor(mins / 60);
+      if (hours < 24) return `${hours}h ago`;
+      const days = Math.floor(hours / 24);
+      if (days < 30) return `${days}d ago`;
+      const months = Math.floor(days / 30);
+      if (months < 12) return `${months}mo ago`;
+      const years = Math.floor(months / 12);
+      return `${years}y ago`;
+    }
+
+    function createCommentEl(comment: { id: string; name: string; body: string; createdAt: string }): HTMLElement {
+      const el = document.createElement('div');
+      el.className = 'comment';
+      el.setAttribute('data-id', comment.id);
+
+      const header = document.createElement('div');
+      header.className = 'comment-header';
+
+      const author = document.createElement('span');
+      author.className = 'comment-author';
+      author.textContent = comment.name;
+
+      const sep = document.createElement('span');
+      sep.className = 'comment-time';
+      sep.textContent = '\u00b7';
+
+      const time = document.createElement('span');
+      time.className = 'comment-time';
+      time.textContent = relativeTime(comment.createdAt);
+
+      header.appendChild(author);
+      header.appendChild(sep);
+      header.appendChild(time);
+
+      const body = document.createElement('p');
+      body.className = 'comment-body';
+      body.textContent = comment.body;
+
+      el.appendChild(header);
+      el.appendChild(body);
+
+      return el;
+    }
+
+    function renderComments(comments: { id: string; name: string; body: string; createdAt: string }[]) {
+      commentsList.innerHTML = '';
+      if (comments.length === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'comments-empty';
+        empty.textContent = 'No comments yet. Be the first to share your thoughts.';
+        commentsList.appendChild(empty);
+        return;
+      }
+      comments.forEach((c) => commentsList.appendChild(createCommentEl(c)));
+    }
+
+    // Character counter
+    bodyInput.addEventListener('input', () => {
+      const len = bodyInput.value.length;
+      charCurrent.textContent = String(len);
+      charCount.classList.remove('near-limit', 'at-limit');
+      if (len >= 1000) {
+        charCount.classList.add('at-limit');
+      } else if (len >= 900) {
+        charCount.classList.add('near-limit');
+      }
+    });
+
+    // Fetch existing comments
+    fetch(`/api/comments?slug=${encodeURIComponent(slug)}`)
+      .then((res) => res.ok ? res.json() : Promise.reject())
+      .then((data: { comments: any[]; count: number }) => {
+        renderComments(data.comments);
+      })
+      .catch(() => {});
+
+    // Submit handler
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formMessage.textContent = '';
+      formMessage.className = 'form-message';
+
+      const name = nameInput.value.trim();
+      const body = bodyInput.value.trim();
+      const website = websiteInput.value;
+
+      if (!name) {
+        formMessage.textContent = 'Please enter your name.';
+        formMessage.classList.add('error');
+        nameInput.focus();
+        return;
+      }
+
+      if (name.length > 50) {
+        formMessage.textContent = 'Name must be 50 characters or fewer.';
+        formMessage.classList.add('error');
+        nameInput.focus();
+        return;
+      }
+
+      if (!body) {
+        formMessage.textContent = 'Please enter a comment.';
+        formMessage.classList.add('error');
+        bodyInput.focus();
+        return;
+      }
+
+      if (body.length > 1000) {
+        formMessage.textContent = 'Comment must be 1000 characters or fewer.';
+        formMessage.classList.add('error');
+        bodyInput.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Posting...';
+
+      // Optimistic render
+      const optimisticComment = {
+        id: 'temp-' + Date.now(),
+        name,
+        body,
+        createdAt: new Date().toISOString(),
+      };
+
+      // Remove "no comments" message if present
+      const emptyMsg = commentsList.querySelector('.comments-empty');
+      if (emptyMsg) emptyMsg.remove();
+
+      const newEl = createCommentEl(optimisticComment);
+      commentsList.insertBefore(newEl, commentsList.firstChild);
+
+      try {
+        const res = await fetch('/api/comments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, name, body, website }),
+        });
+
+        if (res.status === 429) {
+          newEl.remove();
+          formMessage.textContent = 'Please wait a minute before posting again.';
+          formMessage.classList.add('error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Post comment';
+          return;
+        }
+
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({ error: 'Something went wrong.' }));
+          newEl.remove();
+          formMessage.textContent = err.error || 'Something went wrong.';
+          formMessage.classList.add('error');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Post comment';
+          return;
+        }
+
+        // Success
+        nameInput.value = '';
+        bodyInput.value = '';
+        charCurrent.textContent = '0';
+        charCount.classList.remove('near-limit', 'at-limit');
+        formMessage.textContent = 'Comment posted!';
+        formMessage.classList.add('success');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Post comment';
+
+        setTimeout(() => {
+          formMessage.textContent = '';
+          formMessage.className = 'form-message';
+        }, 3000);
+      } catch {
+        newEl.remove();
+        formMessage.textContent = 'Network error. Please try again.';
+        formMessage.classList.add('error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Post comment';
+      }
+    });
+  });
+</script>
