@@ -55,15 +55,8 @@ const schemas = [
 const prevUrl = page.url.prev || undefined;
 const nextUrl = page.url.next || undefined;
 
-// Build article map for client-side popular sections
-const allArticlesForMap = await getCollection('articles', ({ data }) => !data.draft);
-const articleMap: Record<string, { title: string; category: string }> = {};
-for (const article of allArticlesForMap) {
-  articleMap[article.id] = {
-    title: article.data.title,
-    category: article.data.category,
-  };
-}
+// All articles for popular sections (server-rendered as hidden card pool)
+const allArticlesForPopular = await getCollection('articles', ({ data }) => !data.draft);
 ---
 
 <BaseLayout
@@ -100,19 +93,31 @@ for (const article of allArticlesForMap) {
     <Pagination page={page} baseUrl="" />
 
     <div class="popular-sections" style="display:none;">
-      <div class="popular-grid">
-        <section class="card popular-section" id="most-commented">
-          <h2 class="popular-heading">Most commented</h2>
-          <ol class="popular-list"></ol>
-        </section>
-        <section class="card popular-section" id="most-liked">
-          <h2 class="popular-heading">Most liked</h2>
-          <ol class="popular-list"></ol>
-        </section>
-      </div>
+      <section id="most-commented">
+        <h2 class="popular-heading">Most commented</h2>
+        <div class="article-grid popular-grid"></div>
+      </section>
+      <section id="most-liked">
+        <h2 class="popular-heading">Most liked</h2>
+        <div class="article-grid popular-grid"></div>
+      </section>
     </div>
 
-    <script type="application/json" id="article-map" set:html={JSON.stringify(articleMap)}></script>
+    <div id="card-pool" style="display:none;" aria-hidden="true">
+      {allArticlesForPopular.map((article) => (
+        <ArticleCard
+          title={article.data.title}
+          description={article.data.description}
+          slug={article.id}
+          category={article.data.category}
+          author={article.data.author}
+          publishDate={article.data.publishDate}
+          wordCount={article.body ? article.body.split(/\s+/).length : 0}
+          headingLevel={3}
+          dataSlug={article.id}
+        />
+      ))}
+    </div>
   </section>
 </BaseLayout>
 
@@ -154,135 +159,76 @@ for (const article of allArticlesForMap) {
 
   .popular-sections {
     margin-top: var(--space-12);
-  }
-
-  .popular-grid {
-    display: grid;
-    gap: var(--space-6);
-  }
-
-  @media (min-width: 768px) {
-    .popular-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
   }
 
   .popular-heading {
-    font-size: var(--text-lg);
+    font-size: var(--text-xl);
     font-weight: var(--weight-semibold);
-    margin-bottom: var(--space-4);
-  }
-
-  .popular-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-  }
-
-  .popular-item {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--space-3);
-  }
-
-  .popular-item a {
-    font-size: var(--text-sm);
-    color: var(--color-text);
-    text-decoration: none;
-    transition: color var(--transition-fast);
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .popular-item a:hover {
-    color: var(--color-link);
-  }
-
-  .popular-badge {
-    flex-shrink: 0;
-    font-size: var(--text-xs);
-    font-weight: var(--weight-medium);
-    color: var(--color-text-tertiary);
-    background: var(--color-bg-alt);
-    padding: var(--space-1) var(--space-2);
-    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-6);
   }
 </style>
 
 <script>
-  const mapEl = document.getElementById('article-map');
-  if (mapEl) {
-    const articles: Record<string, { title: string; category: string }> = JSON.parse(mapEl.textContent || '{}');
-
+  const pool = document.getElementById('card-pool');
+  if (pool) {
     fetch('/api/stats')
       .then((res) => (res.ok ? res.json() : Promise.reject()))
       .then((data: { comments: Record<string, number>; votes: Record<string, { up: number; down: number }> }) => {
         const wrapper = document.querySelector('.popular-sections') as HTMLElement;
         if (!wrapper) return;
 
+        const poolCards = pool.querySelectorAll('[data-slug]');
+        const cardsBySlug = new Map<string, Element>();
+        poolCards.forEach((card) => {
+          const slug = card.getAttribute('data-slug');
+          if (slug) cardsBySlug.set(slug, card);
+        });
+
         // Most commented (top 3)
-        const commentEntries = Object.entries(data.comments)
-          .filter(([slug]) => articles[slug])
+        const commentSlugs = Object.entries(data.comments)
+          .filter(([slug]) => cardsBySlug.has(slug))
           .sort((a, b) => b[1] - a[1])
-          .slice(0, 3);
+          .slice(0, 3)
+          .map(([slug]) => slug);
 
         // Most liked by upvotes (top 3)
-        const likeEntries = Object.entries(data.votes)
-          .filter(([slug]) => articles[slug])
+        const likeSlugs = Object.entries(data.votes)
+          .filter(([slug]) => cardsBySlug.has(slug))
           .sort((a, b) => b[1].up - a[1].up)
-          .slice(0, 3);
+          .slice(0, 3)
+          .map(([slug]) => slug);
 
-        if (commentEntries.length === 0 && likeEntries.length === 0) return;
+        if (commentSlugs.length === 0 && likeSlugs.length === 0) return;
 
-        const commentList = document.querySelector('#most-commented .popular-list') as HTMLElement;
-        const likeList = document.querySelector('#most-liked .popular-list') as HTMLElement;
+        const commentGrid = document.querySelector('#most-commented .popular-grid') as HTMLElement;
+        const likeGrid = document.querySelector('#most-liked .popular-grid') as HTMLElement;
 
-        function populateList(list: HTMLElement, entries: [string, any][], getCount: (val: any) => number) {
-          entries.forEach(([slug, val]) => {
-            const article = articles[slug];
-            if (!article) return;
-
-            const li = document.createElement('li');
-            li.className = 'popular-item';
-
-            const link = document.createElement('a');
-            link.href = `/${article.category}/${slug}`;
-            link.textContent = article.title;
-
-            const badge = document.createElement('span');
-            badge.className = 'popular-badge';
-            badge.textContent = String(getCount(val));
-
-            li.appendChild(link);
-            li.appendChild(badge);
-            list.appendChild(li);
+        if (commentSlugs.length > 0 && commentGrid) {
+          commentSlugs.forEach((slug) => {
+            const card = cardsBySlug.get(slug);
+            if (card) commentGrid.appendChild(card.cloneNode(true));
           });
-        }
-
-        if (commentEntries.length > 0 && commentList) {
-          populateList(commentList, commentEntries, (count) => count);
-        }
-
-        if (likeEntries.length > 0 && likeList) {
-          populateList(likeList, likeEntries, (votes) => votes.up);
-        }
-
-        // Hide empty sections
-        if (commentEntries.length === 0) {
+        } else {
           document.getElementById('most-commented')?.remove();
         }
-        if (likeEntries.length === 0) {
+
+        if (likeSlugs.length > 0 && likeGrid) {
+          likeSlugs.forEach((slug) => {
+            const card = cardsBySlug.get(slug);
+            if (card) likeGrid.appendChild(card.cloneNode(true));
+          });
+        } else {
           document.getElementById('most-liked')?.remove();
         }
 
         wrapper.style.display = '';
+        pool.remove();
       })
-      .catch(() => {});
+      .catch(() => {
+        pool.remove();
+      });
   }
 </script>
