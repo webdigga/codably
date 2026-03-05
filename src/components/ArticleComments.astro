@@ -6,8 +6,8 @@ export interface Props {
 const { slug } = Astro.props;
 ---
 
-<section class="article-comments" data-slug={slug}>
-  <h2 class="comments-heading">Comments</h2>
+<section id="comments" class="article-comments" data-slug={slug}>
+  <h2 class="comments-heading">Comments <span class="comments-count"></span></h2>
 
   <form class="comment-form" novalidate>
     <div class="form-group">
@@ -253,11 +253,21 @@ const { slug } = Astro.props;
       }
     });
 
+    const countSpan = section.querySelector('.comments-count') as HTMLElement;
+
+    function updateCount(count: number) {
+      if (countSpan) {
+        countSpan.textContent = `(${count})`;
+      }
+      window.dispatchEvent(new CustomEvent('comments:loaded', { detail: { count } }));
+    }
+
     // Fetch existing comments
     fetch(`/api/comments?slug=${encodeURIComponent(slug)}`)
       .then((res) => res.ok ? res.json() : Promise.reject())
       .then((data: { comments: any[]; count: number }) => {
         renderComments(data.comments);
+        updateCount(data.count);
       })
       .catch(() => {});
 
@@ -344,6 +354,10 @@ const { slug } = Astro.props;
         }
 
         // Success
+        const result = await res.json().catch(() => null);
+        if (result && result.count != null) {
+          updateCount(result.count);
+        }
         nameInput.value = '';
         bodyInput.value = '';
         charCurrent.textContent = '0';

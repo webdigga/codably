@@ -100,6 +100,13 @@ const crumbs = [
             )}
             <span class="meta-sep">&middot;</span>
             <span>{readingTime} min read</span>
+            <span class="meta-sep">&middot;</span>
+            <a href="#comments" class="meta-comments-link">
+              <svg class="meta-comments-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+              <span class="meta-comment-count"></span>
+            </a>
           </div>
         </div>
 
@@ -194,6 +201,23 @@ const crumbs = [
     font-weight: var(--weight-medium);
   }
 
+  .meta-comments-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .meta-comments-link:hover {
+    color: var(--color-link);
+  }
+
+  .meta-comments-icon {
+    flex-shrink: 0;
+  }
+
   .article-layout {
     display: flex;
     flex-direction: column;
@@ -229,3 +253,12 @@ const crumbs = [
     }
   }
 </style>
+
+<script>
+  const countEl = document.querySelector('.meta-comment-count');
+  if (countEl) {
+    window.addEventListener('comments:loaded', ((e: CustomEvent) => {
+      countEl.textContent = `(${e.detail.count})`;
+    }) as EventListener);
+  }
+</script>
