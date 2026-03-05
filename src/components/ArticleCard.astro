@@ -50,16 +50,15 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
           <span>{readingTime} min read</span>
         </>
       )}
-      <span class="card-engagement" style="display:none;">
-        <span class="meta-separator">&middot;</span>
-        <span class="card-likes" style="display:none;">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3l1-2 1 2 1.5 3H14l-3 3 1 4-4-2-4 2 1-4-3-3h3.5z"></path></svg>
-          <span class="card-likes-count"></span>
-        </span>
-        <span class="card-comments" style="display:none;">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h12v8H5l-3 3V3z"></path></svg>
-          <span class="card-comments-count"></span>
-        </span>
+    </div>
+    <div class="card-engagement" style="display:none;">
+      <span class="card-likes" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3l1-2 1 2 1.5 3H14l-3 3 1 4-4-2-4 2 1-4-3-3h3.5z"></path></svg>
+        <span class="card-likes-count"></span>
+      </span>
+      <span class="card-comments" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h12v8H5l-3 3V3z"></path></svg>
+        <span class="card-comments-count"></span>
       </span>
     </div>
   </a>
@@ -130,16 +129,18 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
   }
 
   .card-engagement {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-3);
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
   }
 
   .card-likes,
   .card-comments {
     display: inline-flex;
     align-items: center;
-    gap: 2px;
+    gap: 3px;
   }
 
   .card-likes svg,
