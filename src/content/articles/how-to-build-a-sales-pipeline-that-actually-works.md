@@ -2,6 +2,7 @@
 title: "How to Build a Sales Pipeline That Actually Works"
 description: "Learn how to create a practical sales pipeline for your small business using your CRM, with stages that match how you actually sell."
 publishDate: "2026-02-12"
+dateModified: "2026-02-28"
 author: "david-white"
 category: "sales-pipeline"
 tags: ["sales pipeline", "lead management", "CRM setup"]

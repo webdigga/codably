@@ -2,6 +2,7 @@
 title: "Why Client Retention Matters More Than Acquisition"
 description: "Discover why keeping existing clients is more profitable than finding new ones, and how your CRM can help you retain more business."
 publishDate: "2026-02-13"
+dateModified: "2026-03-02"
 author: "david-white"
 category: "client-retention"
 tags: ["client retention", "customer loyalty", "small business growth"]

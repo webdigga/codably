@@ -2,6 +2,7 @@
 title: "CRM Metrics That Actually Matter for Growing Businesses"
 description: "Cut through vanity metrics and focus on the CRM numbers that genuinely drive growth for small UK businesses."
 publishDate: "2026-02-15"
+dateModified: "2026-03-04"
 author: "david-white"
 category: "business-growth"
 tags: ["CRM metrics", "business growth", "data-driven"]

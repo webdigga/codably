@@ -2,6 +2,7 @@
 title: "How to Choose the Right CRM for Your Business"
 description: "A practical guide to evaluating and choosing a CRM that fits your small business, covering features, pricing, and common pitfalls."
 publishDate: "2026-02-18"
+dateModified: "2026-03-03"
 author: "david-white"
 category: "getting-started"
 tags: ["choosing a CRM", "CRM comparison", "getting started"]

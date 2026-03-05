@@ -14,6 +14,7 @@ export interface Props {
   title: string;
   description: string;
   publishDate: string;
+  dateModified?: string;
   author: string;
   category: string;
   slug: string;
@@ -29,6 +30,7 @@ const {
   title,
   description,
   publishDate,
+  dateModified,
   author,
   category,
   slug,
@@ -48,6 +50,14 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
   month: 'long',
   year: 'numeric',
 });
+const showModified = dateModified && dateModified !== publishDate;
+const modifiedFormatted = showModified
+  ? new Date(dateModified).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
+  : '';
 const url = new URL(Astro.url.pathname, Astro.site).href;
 
 const crumbs = [
@@ -73,12 +83,20 @@ const crumbs = [
           <h1>{title}</h1>
 
           <div class="article-meta">
-            {authorData.avatar && (
-              <img src={authorData.avatar} alt={authorData.name} class="meta-avatar" width="32" height="32" />
-            )}
-            <span class="meta-author">{authorData.name}</span>
+            <a href={`/author/${author}`} class="meta-author-link">
+              {authorData.avatar && (
+                <img src={authorData.avatar} alt={authorData.name} class="meta-avatar" width="32" height="32" />
+              )}
+              <span class="meta-author">{authorData.name}</span>
+            </a>
             <span class="meta-sep">&middot;</span>
             <time datetime={publishDate}>{dateFormatted}</time>
+            {showModified && (
+              <>
+                <span class="meta-sep">&middot;</span>
+                <span class="meta-updated">Updated <time datetime={dateModified}>{modifiedFormatted}</time></span>
+              </>
+            )}
             <span class="meta-sep">&middot;</span>
             <span>{readingTime} min read</span>
           </div>
@@ -151,6 +169,22 @@ const crumbs = [
     height: 32px;
     border-radius: var(--radius-full);
     object-fit: cover;
+  }
+
+  .meta-updated {
+    font-style: italic;
+  }
+
+  .meta-author-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: var(--color-link);
+  }
+
+  .meta-author-link:hover {
+    text-decoration: underline;
   }
 
   .meta-author {

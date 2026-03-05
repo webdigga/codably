@@ -2,6 +2,7 @@
 title: "What Is a CRM and Why Does Your Small Business Need One"
 description: "A clear explanation of what CRM software is, how it works, and why small UK businesses should consider using one."
 publishDate: "2026-02-11"
+dateModified: "2026-03-05"
 author: "david-white"
 category: "getting-started"
 tags: ["crm basics", "small business", "getting started"]

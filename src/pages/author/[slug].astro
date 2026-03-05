@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { authors } from '../../data/authors';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return Object.values(authors).map((author) => ({
+    params: { slug: author.slug },
+    props: { author },
+  }));
+};
+
+const { author } = Astro.props;
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const authorArticles = allArticles
+  .filter((a) => a.data.author === author.slug)
+  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+
+const crumbs = [
+  { label: 'Home', href: '/' },
+  { label: author.name },
+];
+
+const schemas = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: author.name,
+    jobTitle: author.role,
+    description: author.bio,
+    image: `https://crmbeat.com${author.avatar}`,
+    url: `https://crmbeat.com/author/${author.slug}`,
+    sameAs: [author.linkedin],
+  },
+];
+---
+
+<BaseLayout
+  title={`${author.name} - CRM Beat`}
+  description={author.bio}
+  schemas={schemas}
+>
+  <section class="container author-page">
+    <Breadcrumbs crumbs={crumbs} />
+
+    <div class="author-profile">
+      {author.avatar && (
+        <img
+          src={author.avatar}
+          alt={author.name}
+          class="author-avatar"
+          width="96"
+          height="96"
+        />
+      )}
+      <div class="author-details">
+        <h1>{author.name}</h1>
+        <p class="author-role">{author.role}</p>
+        <div class="author-bio">
+          {author.fullBio.split('\n\n').map((paragraph: string) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+        <a href={author.linkedin} target="_blank" rel="noopener noreferrer" class="author-linkedin">
+          Connect on LinkedIn
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-left:2px"><path d="M9 3L3 9"/><path d="M4 3h5v5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    {authorArticles.length > 0 && (
+      <div class="author-articles">
+        <h2>Articles by {author.name}</h2>
+        <div class="article-grid">
+          {authorArticles.map((article) => (
+            <ArticleCard
+              title={article.data.title}
+              description={article.data.description}
+              slug={article.id}
+              category={article.data.category}
+              author={article.data.author}
+              publishDate={article.data.publishDate}
+              wordCount={article.body ? article.body.split(/\s+/).length : 0}
+            />
+          ))}
+        </div>
+      </div>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .author-page {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-16);
+  }
+
+  .author-profile {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+
+  .author-avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+  }
+
+  .author-details h1 {
+    margin-bottom: var(--space-1);
+  }
+
+  .author-role {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--space-4);
+  }
+
+  .author-bio {
+    max-width: var(--content-width);
+    margin-bottom: var(--space-4);
+  }
+
+  .author-bio p {
+    margin-bottom: var(--space-3);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .author-linkedin {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+  }
+
+  .author-articles {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-8);
+  }
+
+  .author-articles h2 {
+    margin-bottom: var(--space-6);
+  }
+
+  .article-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    .author-profile {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .article-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .article-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
