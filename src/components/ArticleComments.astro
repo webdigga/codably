@@ -124,7 +124,8 @@ const { slug } = Astro.props;
 
   .comment {
     padding: var(--space-4);
-    background: var(--color-bg-alt);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
   }
 
@@ -132,13 +133,18 @@ const { slug } = Astro.props;
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
   }
 
   .comment-author {
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
     color: var(--color-text);
+  }
+
+  .comment-sep {
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
   }
 
   .comment-time {
@@ -202,7 +208,7 @@ const { slug } = Astro.props;
       author.textContent = comment.name;
 
       const sep = document.createElement('span');
-      sep.className = 'comment-time';
+      sep.className = 'comment-sep';
       sep.textContent = '\u00b7';
 
       const time = document.createElement('span');
