@@ -116,43 +116,43 @@ const { slug } = Astro.props;
     gap: var(--space-6);
   }
 
-  .comments-empty {
+  .comments-list :global(.comments-empty) {
     font-size: var(--text-sm);
     color: var(--color-text-tertiary);
     font-style: italic;
   }
 
-  .comment {
+  .comments-list :global(.comment) {
     padding: var(--space-4);
     background: var(--color-bg-card);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
   }
 
-  .comment-header {
+  .comments-list :global(.comment-header) {
     display: flex;
     align-items: center;
     gap: var(--space-2);
     margin-bottom: var(--space-3);
   }
 
-  .comment-author {
+  .comments-list :global(.comment-author) {
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
     color: var(--color-text);
   }
 
-  .comment-sep {
+  .comments-list :global(.comment-sep) {
     font-size: var(--text-sm);
     color: var(--color-text-tertiary);
   }
 
-  .comment-time {
+  .comments-list :global(.comment-time) {
     font-size: var(--text-xs);
     color: var(--color-text-tertiary);
   }
 
-  .comment-body {
+  .comments-list :global(.comment-body) {
     font-size: var(--text-sm);
     line-height: var(--leading-relaxed);
     color: var(--color-text-secondary);
