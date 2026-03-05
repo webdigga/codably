@@ -11,10 +11,9 @@ export interface Props {
   publishDate: string;
   wordCount?: number;
   headingLevel?: 2 | 3;
-  dataSlug?: string;
 }
 
-const { title, description, slug, category, author, publishDate, wordCount = 0, headingLevel = 2, dataSlug } = Astro.props;
+const { title, description, slug, category, author, publishDate, wordCount = 0, headingLevel = 2 } = Astro.props;
 const Heading = `h${headingLevel}` as any;
 
 const cat = categories.find((c) => c.slug === category);
@@ -29,7 +28,7 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
 });
 ---
 
-<article class="card article-card" data-slug={dataSlug}>
+<article class="card article-card" data-slug={slug}>
   <a href={`/${category}/${slug}`} class="article-card-link">
     {cat && (
       <span class="article-card-category">
@@ -51,6 +50,17 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
           <span>{readingTime} min read</span>
         </>
       )}
+      <span class="card-engagement" style="display:none;">
+        <span class="meta-separator">&middot;</span>
+        <span class="card-likes" style="display:none;">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3l1-2 1 2 1.5 3H14l-3 3 1 4-4-2-4 2 1-4-3-3h3.5z"></path></svg>
+          <span class="card-likes-count"></span>
+        </span>
+        <span class="card-comments" style="display:none;">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h12v8H5l-3 3V3z"></path></svg>
+          <span class="card-comments-count"></span>
+        </span>
+      </span>
     </div>
   </a>
 </article>
@@ -117,5 +127,23 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
 
   .meta-separator {
     color: var(--color-text-tertiary);
+  }
+
+  .card-engagement {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .card-likes,
+  .card-comments {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .card-likes svg,
+  .card-comments svg {
+    flex-shrink: 0;
   }
 </style>

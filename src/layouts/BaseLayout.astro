@@ -52,5 +52,44 @@ const { title, description, canonical, ogImage, ogType, schemas, prevUrl, nextUr
       <slot />
     </main>
     <Footer />
+    <script>
+      fetch('/api/stats')
+        .then((res) => (res.ok ? res.json() : Promise.reject()))
+        .then((data: { comments: Record<string, number>; votes: Record<string, { up: number; down: number }> }) => {
+          document.querySelectorAll('.article-card[data-slug]').forEach((card) => {
+            const slug = card.getAttribute('data-slug');
+            if (!slug) return;
+
+            const commentCount = data.comments[slug] || 0;
+            const likeCount = data.votes[slug]?.up || 0;
+
+            if (commentCount === 0 && likeCount === 0) return;
+
+            const engagement = card.querySelector('.card-engagement') as HTMLElement;
+            if (!engagement) return;
+
+            if (likeCount > 0) {
+              const likes = engagement.querySelector('.card-likes') as HTMLElement;
+              const likesCount = engagement.querySelector('.card-likes-count') as HTMLElement;
+              if (likes && likesCount) {
+                likesCount.textContent = String(likeCount);
+                likes.style.display = '';
+              }
+            }
+
+            if (commentCount > 0) {
+              const comments = engagement.querySelector('.card-comments') as HTMLElement;
+              const commentsCount = engagement.querySelector('.card-comments-count') as HTMLElement;
+              if (comments && commentsCount) {
+                commentsCount.textContent = String(commentCount);
+                comments.style.display = '';
+              }
+            }
+
+            engagement.style.display = '';
+          });
+        })
+        .catch(() => {});
+    </script>
   </body>
 </html>

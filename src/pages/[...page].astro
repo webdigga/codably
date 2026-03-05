@@ -114,7 +114,6 @@ const allArticlesForPopular = await getCollection('articles', ({ data }) => !dat
           publishDate={article.data.publishDate}
           wordCount={article.body ? article.body.split(/\s+/).length : 0}
           headingLevel={3}
-          dataSlug={article.id}
         />
       ))}
     </div>
