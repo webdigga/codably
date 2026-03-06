@@ -48,28 +48,30 @@ const schemas = [
     <Breadcrumbs crumbs={crumbs} />
 
     <div class="author-profile">
-      {author.avatar && (
-        <img
-          src={author.avatar}
-          alt={author.name}
-          class="author-avatar"
-          width="96"
-          height="96"
-        />
-      )}
-      <div class="author-details">
-        <h1>{author.name}</h1>
-        <p class="author-role">{author.role}</p>
-        <div class="author-bio">
-          {author.fullBio.split('\n\n').map((paragraph: string) => (
-            <p>{paragraph}</p>
-          ))}
+      <div class="author-header">
+        {author.avatar && (
+          <img
+            src={author.avatar}
+            alt={author.name}
+            class="author-avatar"
+            width="96"
+            height="96"
+          />
+        )}
+        <div class="author-name-role">
+          <h1>{author.name}</h1>
+          <p class="author-role">{author.role}</p>
         </div>
-        <a href={author.linkedin} target="_blank" rel="noopener noreferrer" class="author-linkedin">
-          Connect on LinkedIn
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-left:2px"><path d="M9 3L3 9"/><path d="M4 3h5v5"/></svg>
-        </a>
       </div>
+      <div class="author-bio">
+        {author.fullBio.split('\n\n').map((paragraph: string) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+      <a href={author.linkedin} target="_blank" rel="noopener noreferrer" class="author-linkedin">
+        Connect on LinkedIn
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-left:2px"><path d="M9 3L3 9"/><path d="M4 3h5v5"/></svg>
+      </a>
     </div>
 
     {authorArticles.length > 0 && (
@@ -100,10 +102,14 @@ const schemas = [
   }
 
   .author-profile {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-6);
     margin-bottom: var(--space-12);
+  }
+
+  .author-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
   }
 
   .author-avatar {
@@ -111,16 +117,16 @@ const schemas = [
     height: 96px;
     border-radius: var(--radius-full);
     object-fit: cover;
+    flex-shrink: 0;
   }
 
-  .author-details h1 {
+  .author-name-role h1 {
     margin-bottom: var(--space-1);
   }
 
   .author-role {
     font-size: var(--text-sm);
     color: var(--color-text-tertiary);
-    margin-bottom: var(--space-4);
   }
 
   .author-bio {
@@ -154,11 +160,6 @@ const schemas = [
   }
 
   @media (min-width: 768px) {
-    .author-profile {
-      flex-direction: row;
-      align-items: flex-start;
-    }
-
     .article-grid {
       grid-template-columns: repeat(2, 1fr);
     }

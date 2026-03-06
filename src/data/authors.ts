@@ -27,4 +27,13 @@ export const authors: Record<string, Author> = {
     avatar: '/images/authors/jonny-rowse.avif',
     linkedin: 'https://www.linkedin.com/in/jonny-rowse-70a09126/',
   },
+  'gareth-clubb': {
+    name: 'Gareth Clubb',
+    slug: 'gareth-clubb',
+    role: 'Editor, CRM Beat',
+    bio: 'Gareth is an engineering manager and front-end specialist who is passionate about coaching teams and building better CRM workflows. He writes about the technical side of CRM strategy for small businesses.',
+    fullBio: 'Gareth is an engineering manager and front-end specialist with a passion for coaching and mentoring others. He brings a technical perspective to CRM strategy, helping small businesses understand how the right tools and processes can enable high-performing teams.\n\nAt CRM Beat, Gareth writes about the intersection of technology and client relationship management. His articles focus on practical ways to get more from your CRM, from smarter workflows to better data practices, all grounded in hands-on engineering experience.\n\nWhen he is not writing, Gareth is focused on enabling psychological safety and high performance in the teams he works with, a philosophy that carries through into his approach to CRM adoption and team buy-in.',
+    avatar: '/images/authors/gareth-clubb.avif',
+    linkedin: 'https://www.linkedin.com/in/garethclubb/',
+  },
 };
