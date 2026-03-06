@@ -1,6 +1,6 @@
 ---
 title: "CRM Tips for Estate Agents and Letting Agencies"
-description: "Practical CRM strategies for estate agents, letting agencies, and property managers who need to track viewings, manage vendor relationships, and convert valuations."
+description: "Practical CRM strategies for estate agents and letting agencies who need to track viewings, manage vendors, and convert valuations."
 publishDate: "2026-01-28"
 author: "david-white"
 category: "industry-tips"
