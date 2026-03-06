@@ -130,7 +130,7 @@ Your CRM should track the performance of your win-back efforts. Key metrics to m
 - **Revenue recovered:** What is the value of won-back clients over their first 12 months?
 - **Cost per win-back:** How much time and resource did each recovery take compared to acquiring a new client?
 
-Review these numbers monthly as part of your [regular CRM reporting](/data-reporting/crm-metrics-that-actually-matter-for-growing-businesses). Over time, you will learn which segments respond best, which messages work, and which channels drive the most re-engagement.
+Review these numbers monthly as part of your [regular CRM reporting](/business-growth/crm-metrics-that-actually-matter-for-growing-businesses). Over time, you will learn which segments respond best, which messages work, and which channels drive the most re-engagement.
 
 ## When to let go gracefully
 

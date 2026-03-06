@@ -121,7 +121,7 @@ A backup is only useful if it works. Test your ability to restore data at least 
 
 ## Securing integrations and third-party access
 
-Your CRM probably connects to other tools: email platforms, accounting software, marketing automation, [and more](/business-growth/crm-integrations-that-save-small-businesses-time). Each integration is a potential entry point.
+Your CRM probably connects to other tools: email platforms, accounting software, marketing automation, [and more](/getting-started/crm-integrations-that-save-small-businesses-time). Each integration is a potential entry point.
 
 ### Review connected apps
 

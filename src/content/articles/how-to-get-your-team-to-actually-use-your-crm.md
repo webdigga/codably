@@ -134,7 +134,7 @@ What gets measured gets done. Track simple adoption metrics so you can spot prob
 - **Pipeline accuracy:** Do deal stages reflect reality?
 - **Task completion rate:** Are follow-ups being actioned?
 
-You do not need a complex reporting setup for this. Even a quick weekly scan of activity logs will tell you who is engaged and who is not. For more on which numbers matter, see our guide on [CRM metrics that actually matter](/data-reporting/crm-metrics-that-actually-matter-for-growing-businesses).
+You do not need a complex reporting setup for this. Even a quick weekly scan of activity logs will tell you who is engaged and who is not. For more on which numbers matter, see our guide on [CRM metrics that actually matter](/business-growth/crm-metrics-that-actually-matter-for-growing-businesses).
 
 ### Celebrate wins
 

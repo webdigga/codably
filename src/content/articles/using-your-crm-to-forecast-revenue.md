@@ -117,7 +117,7 @@ It is tempting to log the maximum possible value for each deal. The client menti
 
 ### Ignoring lost deals
 
-Your forecast is only as good as your conversion rates, and your conversion rates are only accurate if you properly record lost deals. If you only track wins, your conversion rates will be artificially high and your forecasts will be too optimistic. Make sure you are [tracking the metrics that matter](/data-reporting/crm-metrics-that-actually-matter-for-growing-businesses) and recording every outcome.
+Your forecast is only as good as your conversion rates, and your conversion rates are only accurate if you properly record lost deals. If you only track wins, your conversion rates will be artificially high and your forecasts will be too optimistic. Make sure you are [tracking the metrics that matter](/business-growth/crm-metrics-that-actually-matter-for-growing-businesses) and recording every outcome.
 
 ### Forecasting without updating
 

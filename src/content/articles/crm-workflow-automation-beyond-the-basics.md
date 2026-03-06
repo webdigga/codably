@@ -148,7 +148,7 @@ Advanced automations often span multiple tools. Your CRM workflow might need to:
 - Generate an invoice in your accounting software when a service is booked.
 - Update a shared spreadsheet or dashboard with new pipeline data.
 
-Most modern CRMs support integrations natively or through tools like <a href="https://zapier.com/" target="_blank" rel="noopener noreferrer">Zapier ↗</a> or <a href="https://make.com/" target="_blank" rel="noopener noreferrer">Make ↗</a>. These connections turn your CRM from a standalone database into the control centre for your entire business. Our article on [CRM integrations that save small businesses time](/business-growth/crm-integrations-that-save-small-businesses-time) covers the most valuable integrations to consider.
+Most modern CRMs support integrations natively or through tools like <a href="https://zapier.com/" target="_blank" rel="noopener noreferrer">Zapier ↗</a> or <a href="https://make.com/" target="_blank" rel="noopener noreferrer">Make ↗</a>. These connections turn your CRM from a standalone database into the control centre for your entire business. Our article on [CRM integrations that save small businesses time](/getting-started/crm-integrations-that-save-small-businesses-time) covers the most valuable integrations to consider.
 
 ## Auditing your automations
 

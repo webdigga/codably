@@ -151,7 +151,7 @@ It is tempting to set goals across every area of your CRM. Resist this urge. Thr
 
 ### Measuring vanity metrics
 
-Not all CRM data is worth tracking as a goal. Total number of contacts in your database, for example, tells you almost nothing about business health. Focus on metrics that indicate quality and progress, not just volume. For guidance on which [CRM metrics genuinely matter](/data-reporting/crm-metrics-that-actually-matter-for-growing-businesses), look at those tied to revenue, retention, and efficiency.
+Not all CRM data is worth tracking as a goal. Total number of contacts in your database, for example, tells you almost nothing about business health. Focus on metrics that indicate quality and progress, not just volume. For guidance on which [CRM metrics genuinely matter](/business-growth/crm-metrics-that-actually-matter-for-growing-businesses), look at those tied to revenue, retention, and efficiency.
 
 ### Setting and forgetting
 

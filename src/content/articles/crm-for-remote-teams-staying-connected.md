@@ -146,7 +146,7 @@ Data silos are the enemy of remote team effectiveness. They form naturally when 
 
 Every tool your team uses for client information should either feed into the CRM or be replaced by the CRM. If client notes live in Google Docs, project updates live in Trello, and communication lives in Slack, you have four places to look for information instead of one. Consolidation is key.
 
-Where full consolidation is not practical, use [CRM integrations](/business-growth/crm-integrations-that-save-small-businesses-time) to pull data from other tools into the CRM automatically. The goal is that anyone should be able to open a client's CRM record and get a complete picture without searching elsewhere.
+Where full consolidation is not practical, use [CRM integrations](/getting-started/crm-integrations-that-save-small-businesses-time) to pull data from other tools into the CRM automatically. The goal is that anyone should be able to open a client's CRM record and get a complete picture without searching elsewhere.
 
 ### Regular data reviews
 
