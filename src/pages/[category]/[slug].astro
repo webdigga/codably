@@ -18,12 +18,27 @@ const { Content, headings } = await render(article);
 const wordCount = article.body ? article.body.split(/\s+/).length : 0;
 const readingTime = Math.max(1, Math.ceil(wordCount / 230));
 
-// Related articles: same category, excluding this one, up to 3
+// Related articles: scored by category match (+2) and shared tags (+1 each)
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const currentTags = new Set(article.data.tags || []);
 const relatedArticles = allArticles
-  .filter((a) => a.data.category === article.data.category && a.id !== article.id)
-  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
-  .slice(0, 3);
+  .filter((a) => a.id !== article.id)
+  .map((a) => {
+    let score = 0;
+    if (a.data.category === article.data.category) score += 2;
+    const aTags = a.data.tags || [];
+    for (const tag of aTags) {
+      if (currentTags.has(tag)) score += 1;
+    }
+    return { article: a, score };
+  })
+  .filter((item) => item.score > 0)
+  .sort((a, b) =>
+    b.score - a.score ||
+    new Date(b.article.data.publishDate).getTime() - new Date(a.article.data.publishDate).getTime()
+  )
+  .slice(0, 3)
+  .map((item) => item.article);
 
 const authorData = authors[article.data.author] || {
   name: article.data.author,

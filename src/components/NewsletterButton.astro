@@ -1,0 +1,189 @@
+---
+export interface Props {
+  label?: string;
+}
+
+const { label = 'Subscribe to CRM Beat' } = Astro.props;
+---
+
+<button class="newsletter-trigger" type="button">{label}</button>
+
+<div class="newsletter-modal" aria-hidden="true">
+  <div class="newsletter-modal-backdrop"></div>
+  <div class="newsletter-modal-dialog">
+    <div class="newsletter-modal-header">
+      <h2 class="newsletter-modal-title">Get CRM tips in your inbox</h2>
+      <button class="newsletter-modal-close" type="button" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="16" y2="16"/><line x1="16" y1="4" x2="4" y2="16"/></svg>
+      </button>
+    </div>
+    <p class="newsletter-modal-desc">Practical advice for small businesses, delivered to your inbox. No spam, no jargon.</p>
+    <p class="newsletter-modal-consent">By subscribing, you agree to receive CRM tips and updates from CRM Beat. We store your email address securely and you can unsubscribe at any time.</p>
+    <div class="newsletter-modal-form" id="kabooly-form-15"></div>
+  </div>
+</div>
+
+<style>
+  .newsletter-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+    color: #ffffff;
+    background: #e85d3a;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .newsletter-trigger:hover {
+    background: #d14e2e;
+  }
+
+  .newsletter-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+  }
+
+  .newsletter-modal.open {
+    display: flex;
+  }
+
+  .newsletter-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .newsletter-modal-dialog {
+    position: relative;
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .newsletter-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-2);
+  }
+
+  .newsletter-modal-title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    color: #111827;
+    margin: 0;
+  }
+
+  .newsletter-modal-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+  }
+
+  .newsletter-modal-close:hover {
+    color: #111827;
+    background: #f3f4f6;
+  }
+
+  .newsletter-modal-desc {
+    font-size: var(--text-sm);
+    color: #6b7280;
+    margin-bottom: var(--space-2);
+  }
+
+  .newsletter-modal-consent {
+    font-size: var(--text-xs);
+    color: #9ca3af;
+    margin-bottom: var(--space-4);
+    line-height: var(--leading-relaxed);
+  }
+
+  .newsletter-modal-form {
+    min-height: 200px;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.newsletter-trigger').forEach((btn) => {
+    const section = btn.closest('footer') || btn.closest('.article-main') || btn.parentElement;
+    const modal = section ? section.querySelector('.newsletter-modal') || document.querySelector('.newsletter-modal') : document.querySelector('.newsletter-modal');
+    if (!modal) return;
+
+    const backdrop = modal.querySelector('.newsletter-modal-backdrop');
+    const closeBtn = modal.querySelector('.newsletter-modal-close');
+    let iframeLoaded = false;
+
+    function openModal() {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      if (!iframeLoaded) {
+        const formContainer = modal.querySelector('#kabooly-form-15');
+        if (formContainer && !formContainer.querySelector('iframe')) {
+          const iframe = document.createElement('iframe');
+          const baseUrl = 'https://crm.kabooly.com/embed/form/15';
+          const params: string[] = [];
+          const urlParams = new URLSearchParams(window.location.search);
+          ['utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term', 'gclid', 'fbclid'].forEach((param) => {
+            const value = urlParams.get(param);
+            if (value) params.push(param + '=' + encodeURIComponent(value));
+          });
+          iframe.src = baseUrl + (params.length ? '?' + params.join('&') : '');
+          iframe.style.width = '100%';
+          iframe.style.border = 'none';
+          iframe.style.minHeight = '400px';
+          iframe.onload = () => {
+            window.addEventListener('message', (e) => {
+              if (e.data.formId === '15' && e.data.height) {
+                iframe.style.height = e.data.height + 'px';
+              }
+            });
+          };
+          formContainer.appendChild(iframe);
+          iframeLoaded = true;
+        }
+      }
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', openModal);
+    closeBtn?.addEventListener('click', closeModal);
+    backdrop?.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        closeModal();
+      }
+    });
+  });
+</script>

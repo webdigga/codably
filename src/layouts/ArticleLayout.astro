@@ -6,6 +6,7 @@ import TableOfContents from '../components/TableOfContents.astro';
 import FAQSection from '../components/FAQSection.astro';
 import FeedbackButtons from '../components/FeedbackButtons.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+import NewsletterButton from '../components/NewsletterButton.astro';
 import ArticleComments from '../components/ArticleComments.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { categories } from '../data/categories';
@@ -69,6 +70,7 @@ const crumbs = [
 ---
 
 <BaseLayout title={title} description={description} ogType="article" schemas={schemas}>
+  <div class="reading-progress"></div>
   <article class="container article-page">
     <Breadcrumbs crumbs={crumbs} />
 
@@ -99,7 +101,7 @@ const crumbs = [
               </>
             )}
             <span class="meta-sep">&middot;</span>
-            <span>{readingTime} min read</span>
+            <span class="reading-time-badge">{readingTime} min read</span>
             <span class="meta-sep">&middot;</span>
             <a href="#comments" class="meta-comments-link">
               <svg class="meta-comments-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -120,6 +122,11 @@ const crumbs = [
 
         <ShareButtons title={title} url={url} />
 
+        <div class="article-subscribe">
+          <p class="article-subscribe-text">Enjoyed this article? Get more CRM tips straight to your inbox.</p>
+          <NewsletterButton />
+        </div>
+
         <ArticleComments slug={slug} />
       </div>
 
@@ -130,6 +137,11 @@ const crumbs = [
 
     <RelatedArticles articles={relatedArticles} />
   </article>
+  <button class="back-to-top" aria-label="Back to top" type="button">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="5 12 10 7 15 12"></polyline>
+    </svg>
+  </button>
 </BaseLayout>
 
 <style>
@@ -228,8 +240,74 @@ const crumbs = [
     min-width: 0;
   }
 
+  .article-subscribe {
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .article-subscribe-text {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+  }
+
   .article-sidebar {
     display: none;
+  }
+
+  .reading-time-badge {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--text-sm);
+  }
+
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: #e85d3a;
+    z-index: calc(var(--z-header) + 1);
+    transition: width 0.1s linear;
+    pointer-events: none;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: var(--space-6);
+    right: var(--space-6);
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: #e85d3a;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease, background 0.2s ease;
+    z-index: var(--z-header);
+    box-shadow: var(--shadow-md);
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    background: #d14e2e;
   }
 
   @media (min-width: 1024px) {
@@ -260,5 +338,40 @@ const crumbs = [
     window.addEventListener('comments:loaded', ((e: CustomEvent) => {
       countEl.textContent = `(${e.detail.count})`;
     }) as EventListener);
+  }
+
+  // Reading progress bar
+  const progressBar = document.querySelector('.reading-progress') as HTMLElement;
+  const article = document.querySelector('.article-page') as HTMLElement;
+
+  if (progressBar && article) {
+    window.addEventListener('scroll', () => {
+      const articleTop = article.offsetTop;
+      const articleHeight = article.offsetHeight;
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const progress = Math.min(
+        100,
+        Math.max(0, ((scrollY - articleTop) / (articleHeight - windowHeight)) * 100)
+      );
+      progressBar.style.width = `${progress}%`;
+    }, { passive: true });
+  }
+
+  // Back to top button
+  const backToTop = document.querySelector('.back-to-top') as HTMLElement;
+
+  if (backToTop) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 </script>

@@ -5,12 +5,53 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
-const sortedArticles = allArticles.sort(
-  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
-);
 
-const featured = sortedArticles.filter((a) => a.data.featured);
-const recent = sortedArticles.slice(0, 6);
+const articleMap = new Map(allArticles.map((a) => [a.id, a]));
+
+function getArticle(slug: string) {
+  return articleMap.get(slug);
+}
+
+const sections = [
+  {
+    number: 1,
+    title: 'Understanding CRM',
+    intro: 'Before you choose a tool or change a process, it helps to understand what a CRM actually does and why it matters for a small business.',
+    slugs: [
+      'what-is-a-crm-and-why-does-your-small-business-need-one',
+      'the-real-cost-of-not-having-a-crm',
+    ],
+  },
+  {
+    number: 2,
+    title: 'Getting set up',
+    intro: 'Ready to take the plunge? These guides walk you through choosing the right system, configuring it properly, and migrating your existing data.',
+    slugs: [
+      'how-to-choose-the-right-crm-for-your-business',
+      'setting-up-your-crm-a-step-by-step-guide',
+      'how-to-move-from-spreadsheets-to-a-crm',
+    ],
+  },
+  {
+    number: 3,
+    title: 'Growing with your CRM',
+    intro: 'Once you are up and running, these articles help you build a proper sales pipeline and keep the clients you have already won.',
+    slugs: [
+      'how-to-build-a-sales-pipeline-that-actually-works',
+      'why-client-retention-matters-more-than-acquisition',
+      'scaling-your-business-without-losing-the-personal-touch',
+    ],
+  },
+  {
+    number: 4,
+    title: 'Going deeper',
+    intro: 'When you are comfortable with the basics, automation and reporting will help you save time and make better decisions.',
+    slugs: [
+      'email-sequences-every-small-business-should-set-up',
+      'crm-reports-every-small-business-should-run-monthly',
+    ],
+  },
+];
 
 const crumbs = [
   { label: 'Home', href: '/' },
@@ -20,50 +61,49 @@ const crumbs = [
 
 <BaseLayout
   title="Start Here"
-  description="New to CRM? Start here. The best articles to help your small business get started with CRM strategy."
+  description="New to CRM? Start here. A curated reading path to help your small business understand, choose, and get the most from a CRM."
 >
   <section class="container start-here">
     <Breadcrumbs crumbs={crumbs} />
 
     <div class="page-header">
       <h1>Start here</h1>
-      <p>New to CRM? These are the articles we recommend reading first. Practical advice to get your small business up and running.</p>
+      <p>New to CRM? Follow this reading path from the basics through to automation. Each section builds on the last, so you can learn at your own pace.</p>
     </div>
 
-    {featured.length > 0 && (
-      <div class="section">
-        <h2>Featured articles</h2>
-        <div class="article-grid">
-          {featured.map((article) => (
-            <ArticleCard
-              title={article.data.title}
-              description={article.data.description}
-              slug={article.id}
-              category={article.data.category}
-              author={article.data.author}
-              publishDate={article.data.publishDate}
-              wordCount={article.body ? article.body.split(/\s+/).length : 0}
-            />
-          ))}
-        </div>
-      </div>
-    )}
+    {sections.map((section) => {
+      const articles = section.slugs
+        .map((slug) => getArticle(slug))
+        .filter((a) => a != null);
 
-    <div class="section">
-      <h2>Most recent</h2>
-      <div class="article-grid">
-        {recent.map((article) => (
-          <ArticleCard
-            title={article.data.title}
-            description={article.data.description}
-            slug={article.id}
-            category={article.data.category}
-            author={article.data.author}
-            publishDate={article.data.publishDate}
-            wordCount={article.body ? article.body.split(/\s+/).length : 0}
-          />
-        ))}
-      </div>
+      return (
+        <div class="section">
+          <div class="section-header">
+            <span class="section-number">{section.number}</span>
+            <div>
+              <h2>{section.title}</h2>
+              <p class="section-intro">{section.intro}</p>
+            </div>
+          </div>
+          <div class="article-grid">
+            {articles.map((article) => (
+              <ArticleCard
+                title={article.data.title}
+                description={article.data.description}
+                slug={article.id}
+                category={article.data.category}
+                author={article.data.author}
+                publishDate={article.data.publishDate}
+                wordCount={article.body ? article.body.split(/\s+/).length : 0}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    })}
+
+    <div class="start-here-cta">
+      <p>Ready to dive in? <a href="/">Browse all articles on the homepage</a>.</p>
     </div>
   </section>
 </BaseLayout>
@@ -75,7 +115,7 @@ const crumbs = [
   }
 
   .page-header {
-    margin-bottom: var(--space-10);
+    margin-bottom: var(--space-12);
   }
 
   .page-header h1 {
@@ -92,8 +132,37 @@ const crumbs = [
     margin-bottom: var(--space-12);
   }
 
-  .section h2 {
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
     margin-bottom: var(--space-6);
+  }
+
+  .section-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    background: var(--brand-primary);
+    color: #ffffff;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-bold);
+    line-height: 1;
+  }
+
+  .section-header h2 {
+    margin-bottom: var(--space-2);
+  }
+
+  .section-intro {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: var(--content-width);
   }
 
   .article-grid {
@@ -111,5 +180,30 @@ const crumbs = [
     .article-grid {
       grid-template-columns: repeat(3, 1fr);
     }
+  }
+
+  .start-here-cta {
+    margin-top: var(--space-8);
+    padding: var(--space-6);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+
+  .start-here-cta p {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+  }
+
+  .start-here-cta a {
+    color: var(--color-link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    font-weight: var(--weight-medium);
+  }
+
+  .start-here-cta a:hover {
+    text-decoration-thickness: 2px;
   }
 </style>

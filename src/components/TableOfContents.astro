@@ -84,8 +84,13 @@ for (const heading of filteredHeadings) {
     text-decoration: none;
   }
 
-  .toc-list a:hover {
+  .toc-list a:hover,
+  .toc-list a.active {
     color: var(--color-link);
+  }
+
+  .toc-list a.active {
+    font-weight: var(--weight-semibold);
   }
 
   .toc-sublist {
@@ -101,4 +106,41 @@ for (const heading of filteredHeadings) {
   .toc-sublist a {
     color: var(--color-text-tertiary);
   }
+
+  .toc-sublist a.active {
+    color: var(--color-link);
+    font-weight: var(--weight-semibold);
+  }
 </style>
+
+<script>
+  const tocNav = document.querySelector('.toc');
+  if (tocNav) {
+    const tocLinks = tocNav.querySelectorAll('a[href^="#"]');
+    const headingElements = document.querySelectorAll('.article-main h2, .article-main h3');
+
+    if (headingElements.length > 0) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              tocLinks.forEach((link) => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) {
+                  link.classList.add('active');
+                }
+              });
+            }
+          }
+        },
+        {
+          rootMargin: '-56px 0px -70% 0px',
+          threshold: 0,
+        }
+      );
+
+      headingElements.forEach((heading) => observer.observe(heading));
+    }
+  }
+</script>

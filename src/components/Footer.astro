@@ -1,7 +1,10 @@
 ---
 import { categories } from '../data/categories';
+import { authors } from '../data/authors';
+import NewsletterButton from './NewsletterButton.astro';
 
 const currentYear = new Date().getFullYear();
+const authorList = Object.values(authors);
 ---
 
 <footer class="site-footer">
@@ -29,8 +32,20 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <div class="footer-col">
+        <h3>Authors</h3>
+        <ul>
+          {authorList.map((author) => (
+            <li><a href={`/author/${author.slug}`}>{author.name}</a></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-col">
         <h3>About CRM Beat</h3>
         <p>Practical CRM strategy for small UK businesses. Honest advice, no jargon, real results.</p>
+        <div class="footer-subscribe">
+          <NewsletterButton label="Subscribe" />
+        </div>
       </div>
     </div>
 
@@ -63,7 +78,7 @@ const currentYear = new Date().getFullYear();
 
   @media (min-width: 768px) {
     .footer-grid {
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
   }
 
@@ -99,6 +114,10 @@ const currentYear = new Date().getFullYear();
     font-size: var(--text-sm);
     color: #9ca3af;
     line-height: var(--leading-relaxed);
+  }
+
+  .footer-subscribe {
+    margin-top: var(--space-4);
   }
 
   .footer-bottom {
