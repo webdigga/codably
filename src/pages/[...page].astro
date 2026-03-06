@@ -189,22 +189,21 @@ const nextUrl = page.url.next || undefined;
       ? `<span class="meta-separator">&middot;</span><span>${readingTime} min read</span>`
       : '';
 
-    article.innerHTML = `
-      <a href="/${info.category}/${info.slug}" class="article-card-link">
-        <div class="article-card-topline">
-          <span class="article-card-category">${info.categoryName}</span>
-        </div>
-        <h3 class="article-card-title">${info.title}</h3>
-        <p class="article-card-excerpt">${info.description}</p>
-        <div class="article-card-meta">
-          ${avatarHtml}
-          <span>${info.authorName}</span>
-          <span class="meta-separator">&middot;</span>
-          <time datetime="${info.publishDate}">${dateFormatted}</time>
-          ${readTimeHtml}
-        </div>
-      </a>
-    `;
+    article.innerHTML =
+      `<a href="/${info.category}/${info.slug}" class="article-card-link">` +
+        `<div class="article-card-topline">` +
+          `<span class="article-card-category">${info.categoryName}</span>` +
+        `</div>` +
+        `<h3 class="article-card-title">${info.title}</h3>` +
+        `<p class="article-card-excerpt">${info.description}</p>` +
+        `<div class="article-card-meta">` +
+          avatarHtml +
+          `<span>${info.authorName}</span>` +
+          `<span class="meta-separator">&middot;</span>` +
+          `<time datetime="${info.publishDate}">${dateFormatted}</time>` +
+          readTimeHtml +
+        `</div>` +
+      `</a>`;
 
     return article;
   }
@@ -212,8 +211,8 @@ const nextUrl = page.url.next || undefined;
   const wrapper = document.querySelector('.popular-sections') as HTMLElement;
   if (wrapper) {
     Promise.all([
-      fetch('/api/stats').then((r) => r.ok ? r.json() : Promise.reject()),
-      fetch('/articles.json').then((r) => r.ok ? r.json() : Promise.reject()),
+      fetch('/api/stats').then((r) => (r.ok ? r.json() : Promise.reject())),
+      fetch('/articles.json').then((r) => (r.ok ? r.json() : Promise.reject())),
     ])
       .then(([stats, articles]: [
         { comments: Record<string, number>; votes: Record<string, { up: number; down: number }> },
