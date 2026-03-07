@@ -24,6 +24,7 @@ import { categories } from '../data/categories';
           ))}
         </div>
       </div>
+      <a href="/tags">Tags</a>
       <a href="/about">About</a>
     </nav>
 
@@ -45,6 +46,7 @@ import { categories } from '../data/categories';
     {categories.map((cat) => (
       <a href={`/${cat.slug}`}>{cat.name}</a>
     ))}
+    <a href="/tags">Tags</a>
     <a href="/about">About</a>
     <a href="/search">Search</a>
   </nav>

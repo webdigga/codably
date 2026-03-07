@@ -40,4 +40,29 @@ export const categories: Category[] = [
     name: 'Data & Reporting',
     description: 'Make sense of your CRM data with reports that drive better decisions.',
   },
+  {
+    slug: 'team-people',
+    name: 'Team & People',
+    description: 'Get your team on board with CRM, build better habits, and create a culture that puts clients first.',
+  },
+  {
+    slug: 'tools-tech',
+    name: 'Tools & Tech',
+    description: 'Compare CRM tools, set up integrations, and make the most of the technology behind your business.',
+  },
+  {
+    slug: 'productivity',
+    name: 'Productivity',
+    description: 'Work smarter with better workflows, time management, and systems that keep your business running smoothly.',
+  },
+  {
+    slug: 'communication',
+    name: 'Communication',
+    description: 'Improve how you communicate with clients, from proposals and follow-ups to everyday conversations.',
+  },
+  {
+    slug: 'strategy',
+    name: 'Strategy',
+    description: 'Plan ahead with practical advice on pricing, positioning, and long-term business decisions.',
+  },
 ];

@@ -9,21 +9,25 @@ const { activeCategory } = Astro.props;
 ---
 
 <nav class="category-tabs" aria-label="Article categories">
-  <div class="tabs-scroll">
-    <a
-      href="/"
-      class:list={['tab', { active: !activeCategory }]}
-    >
-      All
-    </a>
-    {categories.map((cat) => (
+  <div class="tabs-scroll-wrapper">
+    <div class="tabs-scroll">
       <a
-        href={`/${cat.slug}`}
-        class:list={['tab', { active: activeCategory === cat.slug }]}
+        href="/"
+        class:list={['tab', { active: !activeCategory }]}
       >
-        {cat.name}
+        All
       </a>
-    ))}
+      {categories.map((cat) => (
+        <a
+          href={`/${cat.slug}`}
+          class:list={['tab', { active: activeCategory === cat.slug }]}
+        >
+          {cat.name}
+        </a>
+      ))}
+    </div>
+    <div class="tabs-fade tabs-fade-left" aria-hidden="true"></div>
+    <div class="tabs-fade tabs-fade-right" aria-hidden="true"></div>
   </div>
 </nav>
 
@@ -31,6 +35,10 @@ const { activeCategory } = Astro.props;
   .category-tabs {
     margin-bottom: var(--space-8);
     border-bottom: 1px solid var(--color-border);
+  }
+
+  .tabs-scroll-wrapper {
+    position: relative;
   }
 
   .tabs-scroll {
@@ -68,4 +76,56 @@ const { activeCategory } = Astro.props;
     border-bottom-color: var(--color-text);
     font-weight: var(--weight-semibold);
   }
+
+  .tabs-fade {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 1px;
+    width: 40px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .tabs-fade-left {
+    left: 0;
+    background: linear-gradient(to right, var(--color-bg), transparent);
+  }
+
+  .tabs-fade-right {
+    right: 0;
+    background: linear-gradient(to left, var(--color-bg), transparent);
+  }
+
+  .tabs-fade.visible {
+    display: block;
+  }
 </style>
+
+<script>
+  const wrapper = document.querySelector('.tabs-scroll-wrapper');
+  const scroller = wrapper?.querySelector('.tabs-scroll') as HTMLElement | null;
+  const fadeLeft = wrapper?.querySelector('.tabs-fade-left') as HTMLElement | null;
+  const fadeRight = wrapper?.querySelector('.tabs-fade-right') as HTMLElement | null;
+
+  function updateFades() {
+    if (!scroller || !fadeLeft || !fadeRight) return;
+    const { scrollLeft, scrollWidth, clientWidth } = scroller;
+    fadeLeft.classList.toggle('visible', scrollLeft > 4);
+    fadeRight.classList.toggle('visible', scrollLeft + clientWidth < scrollWidth - 4);
+  }
+
+  if (scroller) {
+    updateFades();
+    scroller.addEventListener('scroll', updateFades, { passive: true });
+    window.addEventListener('resize', updateFades, { passive: true });
+
+    // Scroll active tab into view on load
+    const activeTab = scroller.querySelector('.tab.active') as HTMLElement | null;
+    if (activeTab) {
+      activeTab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'instant' });
+      // Re-check fades after scroll
+      requestAnimationFrame(updateFades);
+    }
+  }
+</script>

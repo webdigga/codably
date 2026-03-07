@@ -11,6 +11,7 @@ import ArticleComments from '../components/ArticleComments.astro';
 import RelatedArticles from '../components/RelatedArticles.astro';
 import { categories } from '../data/categories';
 import { authors } from '../data/authors';
+import { slugifyTag, displayTag } from '../utils/tags';
 
 export interface Props {
   title: string;
@@ -110,6 +111,14 @@ const crumbs = [
               <span class="meta-comment-count"></span>
             </a>
           </div>
+
+          {tags.length > 0 && (
+            <div class="article-tags">
+              {tags.map((tag) => (
+                <a href={`/tag/${slugifyTag(tag)}`} class="article-tag">{displayTag(tag)}</a>
+              ))}
+            </div>
+          )}
         </div>
 
         <div class="prose">
@@ -228,6 +237,32 @@ const crumbs = [
 
   .meta-comments-icon {
     flex-shrink: 0;
+  }
+
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .article-tag {
+    display: inline-block;
+    padding: var(--space-1) var(--space-3);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-text-tertiary);
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .article-tag:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-tertiary);
+    background: var(--color-bg-card);
   }
 
   .article-layout {
