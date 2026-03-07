@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
 import { categories } from '../data/categories';
 import { authors } from '../data/authors';
@@ -80,7 +81,19 @@ const searchIndex = articles.map((article) => {
 
     <p id="search-count" class="search-count"></p>
 
-    <div id="search-results" class="article-grid"></div>
+    <div id="search-results" class="article-grid">
+      {articles.slice(0, 9).map((article) => (
+        <ArticleCard
+          title={article.data.title}
+          description={article.data.description}
+          slug={article.id}
+          category={article.data.category}
+          author={article.data.author}
+          publishDate={article.data.publishDate}
+          wordCount={article.body ? article.body.split(/\s+/).length : 0}
+        />
+      ))}
+    </div>
 
     <p id="no-results" class="no-results" hidden>No articles found. Try a different search term.</p>
   </section>
@@ -89,6 +102,8 @@ const searchIndex = articles.map((article) => {
 <script type="application/json" id="search-index" set:html={JSON.stringify(searchIndex)} />
 
 <script>
+  import { buildCard } from '../utils/buildCard';
+
   interface SearchItem {
     title: string;
     description: string;
@@ -113,44 +128,6 @@ const searchIndex = articles.map((article) => {
   const countEl = document.getElementById('search-count')!;
 
   const MAX_RESULTS = 30;
-
-  function buildCard(item: SearchItem): HTMLElement {
-    const readingTime = Math.max(1, Math.ceil(item.wordCount / 230));
-    const dateFormatted = new Date(item.publishDate).toLocaleDateString('en-GB', {
-      day: 'numeric',
-      month: 'short',
-      year: 'numeric',
-    });
-
-    const article = document.createElement('article');
-    article.className = 'card article-card';
-
-    const avatarHtml = item.authorAvatar
-      ? `<img src="${item.authorAvatar}" alt="${item.authorName}" class="article-card-avatar" width="20" height="20" loading="lazy" />`
-      : '';
-
-    const readTimeHtml = item.wordCount > 0
-      ? `<span class="meta-separator">&middot;</span><span>${readingTime} min read</span>`
-      : '';
-
-    article.innerHTML =
-      `<a href="/${item.category}/${item.slug}" class="article-card-link">` +
-        `<div class="article-card-topline">` +
-          `<span class="article-card-category">${item.categoryName}</span>` +
-        `</div>` +
-        `<h3 class="article-card-title">${item.title}</h3>` +
-        `<p class="article-card-excerpt">${item.description}</p>` +
-        `<div class="article-card-meta">` +
-          avatarHtml +
-          `<span>${item.authorName}</span>` +
-          `<span class="meta-separator">&middot;</span>` +
-          `<time datetime="${item.publishDate}">${dateFormatted}</time>` +
-          readTimeHtml +
-        `</div>` +
-      `</a>`;
-
-    return article;
-  }
 
   let debounceTimer: ReturnType<typeof setTimeout>;
 
