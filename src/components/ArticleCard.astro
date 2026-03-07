@@ -160,3 +160,61 @@ const dateFormatted = new Date(publishDate).toLocaleDateString('en-GB', {
     flex-shrink: 0;
   }
 </style>
+
+<script>
+  function populateCardEngagement(
+    card: Element,
+    stats: { comments: Record<string, number>; votes: Record<string, { up: number; down: number }> }
+  ) {
+    const slug = card.getAttribute('data-slug');
+    if (!slug) return;
+
+    const likes = stats.votes[slug]?.up || 0;
+    const comments = stats.comments[slug] || 0;
+
+    if (likes > 0) {
+      const likesEl = card.querySelector('.card-likes') as HTMLElement;
+      const likesCount = card.querySelector('.card-likes-count');
+      if (likesEl && likesCount) {
+        likesCount.textContent = String(likes);
+        likesEl.style.display = '';
+      }
+    }
+
+    if (comments > 0) {
+      const commentsEl = card.querySelector('.card-comments') as HTMLElement;
+      const commentsCount = card.querySelector('.card-comments-count');
+      if (commentsEl && commentsCount) {
+        commentsCount.textContent = String(comments);
+        commentsEl.style.display = '';
+      }
+    }
+
+    if (likes > 0 || comments > 0) {
+      const engagement = card.querySelector('.card-engagement') as HTMLElement;
+      if (engagement) engagement.style.display = '';
+    }
+  }
+
+  fetch('/api/stats')
+    .then((r) => r.ok ? r.json() : Promise.reject())
+    .then((stats: { comments: Record<string, number>; votes: Record<string, { up: number; down: number }> }) => {
+      document.querySelectorAll('.article-card').forEach((card) => populateCardEngagement(card, stats));
+
+      // Watch for dynamically added cards (e.g. popular sections, search results)
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          for (const node of mutation.addedNodes) {
+            if (node instanceof HTMLElement) {
+              if (node.classList.contains('article-card')) {
+                populateCardEngagement(node, stats);
+              }
+              node.querySelectorAll?.('.article-card').forEach((card) => populateCardEngagement(card, stats));
+            }
+          }
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    })
+    .catch(() => {});
+</script>

@@ -191,7 +191,7 @@ const nextUrl = page.url.next || undefined;
         if (commentSlugs.length > 0 && commentGrid) {
           commentSlugs.forEach((slug) => {
             const info = bySlug.get(slug);
-            if (info) commentGrid.appendChild(buildCard(info, stats.votes[slug]?.up || 0, stats.comments[slug] || 0));
+            if (info) commentGrid.appendChild(buildCard(info));
           });
         } else {
           document.getElementById('most-commented')?.remove();
@@ -200,7 +200,7 @@ const nextUrl = page.url.next || undefined;
         if (likeSlugs.length > 0 && likeGrid) {
           likeSlugs.forEach((slug) => {
             const info = bySlug.get(slug);
-            if (info) likeGrid.appendChild(buildCard(info, stats.votes[slug]?.up || 0, stats.comments[slug] || 0));
+            if (info) likeGrid.appendChild(buildCard(info));
           });
         } else {
           document.getElementById('most-liked')?.remove();

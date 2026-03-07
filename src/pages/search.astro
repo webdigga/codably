@@ -128,6 +128,7 @@ const searchIndex = articles.map((article) => {
   const countEl = document.getElementById('search-count')!;
 
   const MAX_RESULTS = 30;
+  const initialHtml = resultsContainer.innerHTML;
 
   let debounceTimer: ReturnType<typeof setTimeout>;
 
@@ -139,6 +140,7 @@ const searchIndex = articles.map((article) => {
     countEl.textContent = '';
 
     if (q.length < 3) {
+      resultsContainer.innerHTML = initialHtml;
       if (!q) updateUrl('');
       return;
     }
