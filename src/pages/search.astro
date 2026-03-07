@@ -1,11 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ArticleCard from '../components/ArticleCard.astro';
 import { getCollection } from 'astro:content';
+import { categories } from '../data/categories';
+import { authors } from '../data/authors';
 
 const allArticles = await getCollection('articles', ({ data }) => !data.draft);
 const articles = allArticles.sort(
   (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+const catMap = Object.fromEntries(categories.map((c) => [c.slug, c.name]));
+const authorMap = Object.fromEntries(
+  Object.values(authors).map((a) => [a.slug, { name: a.name, avatar: a.avatar }])
 );
 
 function stripMarkdown(text: string): string {
@@ -28,14 +34,18 @@ const searchIndex = articles.map((article) => {
   const body = article.body || '';
   const plaintext = stripMarkdown(body);
   const excerpt = plaintext.split(/\s+/).slice(0, 300).join(' ');
+  const authorInfo = authorMap[article.data.author];
 
   return {
     title: article.data.title,
     description: article.data.description,
     tags: article.data.tags || [],
     category: article.data.category,
+    categoryName: catMap[article.data.category] || article.data.category,
     slug: article.id,
     author: article.data.author,
+    authorName: authorInfo?.name || article.data.author,
+    authorAvatar: authorInfo?.avatar || '',
     publishDate: article.data.publishDate,
     wordCount: body.split(/\s+/).length,
     excerpt,
@@ -70,20 +80,7 @@ const searchIndex = articles.map((article) => {
 
     <p id="search-count" class="search-count"></p>
 
-    <div id="search-results" class="article-grid">
-      {articles.map((article) => (
-        <ArticleCard
-          title={article.data.title}
-          description={article.data.description}
-          slug={article.id}
-          category={article.data.category}
-          author={article.data.author}
-          publishDate={article.data.publishDate}
-          wordCount={article.body ? article.body.split(/\s+/).length : 0}
-          dataSlug={article.id}
-        />
-      ))}
-    </div>
+    <div id="search-results" class="article-grid"></div>
 
     <p id="no-results" class="no-results" hidden>No articles found. Try a different search term.</p>
   </section>
@@ -92,40 +89,85 @@ const searchIndex = articles.map((article) => {
 <script type="application/json" id="search-index" set:html={JSON.stringify(searchIndex)} />
 
 <script>
-  const indexEl = document.getElementById('search-index');
-  const index: Array<{
+  interface SearchItem {
     title: string;
     description: string;
     tags: string[];
     category: string;
+    categoryName: string;
     slug: string;
     author: string;
+    authorName: string;
+    authorAvatar: string;
     publishDate: string;
     wordCount: number;
     excerpt: string;
-  }> = indexEl ? JSON.parse(indexEl.textContent || '[]') : [];
+  }
+
+  const indexEl = document.getElementById('search-index');
+  const index: SearchItem[] = indexEl ? JSON.parse(indexEl.textContent || '[]') : [];
 
   const input = document.getElementById('search-input') as HTMLInputElement;
   const resultsContainer = document.getElementById('search-results')!;
   const noResults = document.getElementById('no-results')!;
   const countEl = document.getElementById('search-count')!;
-  const cards = resultsContainer.querySelectorAll<HTMLElement>('.article-card');
+
+  const MAX_RESULTS = 30;
+
+  function buildCard(item: SearchItem): HTMLElement {
+    const readingTime = Math.max(1, Math.ceil(item.wordCount / 230));
+    const dateFormatted = new Date(item.publishDate).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+
+    const article = document.createElement('article');
+    article.className = 'card article-card';
+
+    const avatarHtml = item.authorAvatar
+      ? `<img src="${item.authorAvatar}" alt="${item.authorName}" class="article-card-avatar" width="20" height="20" loading="lazy" />`
+      : '';
+
+    const readTimeHtml = item.wordCount > 0
+      ? `<span class="meta-separator">&middot;</span><span>${readingTime} min read</span>`
+      : '';
+
+    article.innerHTML =
+      `<a href="/${item.category}/${item.slug}" class="article-card-link">` +
+        `<div class="article-card-topline">` +
+          `<span class="article-card-category">${item.categoryName}</span>` +
+        `</div>` +
+        `<h3 class="article-card-title">${item.title}</h3>` +
+        `<p class="article-card-excerpt">${item.description}</p>` +
+        `<div class="article-card-meta">` +
+          avatarHtml +
+          `<span>${item.authorName}</span>` +
+          `<span class="meta-separator">&middot;</span>` +
+          `<time datetime="${item.publishDate}">${dateFormatted}</time>` +
+          readTimeHtml +
+        `</div>` +
+      `</a>`;
+
+    return article;
+  }
 
   let debounceTimer: ReturnType<typeof setTimeout>;
 
   function search(query: string) {
     const q = query.toLowerCase().trim();
 
+    resultsContainer.innerHTML = '';
+    noResults.hidden = true;
+    countEl.textContent = '';
+
     if (q.length < 3) {
-      cards.forEach((card) => (card.style.display = ''));
-      noResults.hidden = true;
-      countEl.textContent = '';
       if (!q) updateUrl('');
       return;
     }
 
     const terms = q.split(/\s+/);
-    const matchingSlugs = new Set<string>();
+    const matches: SearchItem[] = [];
 
     for (const item of index) {
       const haystack = [
@@ -138,25 +180,21 @@ const searchIndex = articles.map((article) => {
         .join(' ')
         .toLowerCase();
 
-      const matches = terms.every((term) => haystack.includes(term));
-      if (matches) {
-        matchingSlugs.add(item.slug);
+      if (terms.every((term) => haystack.includes(term))) {
+        matches.push(item);
+        if (matches.length >= MAX_RESULTS) break;
       }
     }
 
-    let visibleCount = 0;
-    cards.forEach((card) => {
-      const slug = card.getAttribute('data-slug') || '';
-      if (matchingSlugs.has(slug)) {
-        card.style.display = '';
-        visibleCount++;
-      } else {
-        card.style.display = 'none';
-      }
-    });
+    if (matches.length === 0) {
+      noResults.hidden = false;
+    } else {
+      matches.forEach((item) => resultsContainer.appendChild(buildCard(item)));
+      countEl.textContent = matches.length >= MAX_RESULTS
+        ? `Showing first ${MAX_RESULTS} results`
+        : `${matches.length} result${matches.length === 1 ? '' : 's'}`;
+    }
 
-    noResults.hidden = visibleCount > 0;
-    countEl.textContent = visibleCount > 0 ? `${visibleCount} result${visibleCount === 1 ? '' : 's'}` : '';
     updateUrl(query);
   }
 
@@ -175,12 +213,10 @@ const searchIndex = articles.map((article) => {
     debounceTimer = setTimeout(() => search(input.value), 200);
   });
 
-  // Handle native clear button (the X on type="search")
   input.addEventListener('search', () => {
     search(input.value);
   });
 
-  // Check for ?q= parameter on load
   const params = new URLSearchParams(window.location.search);
   const initialQuery = params.get('q');
   if (initialQuery) {

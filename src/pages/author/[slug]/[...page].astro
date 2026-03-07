@@ -1,24 +1,30 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import ArticleCard from '../../components/ArticleCard.astro';
-import { authors } from '../../data/authors';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import Pagination from '../../../components/Pagination.astro';
+import { authors } from '../../../data/authors';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return Object.values(authors).map((author) => ({
-    params: { slug: author.slug },
-    props: { author },
-  }));
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+
+  return Object.values(authors).flatMap((author) => {
+    const authorArticles = allArticles
+      .filter((a) => a.data.author === author.slug)
+      .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+
+    return paginate(authorArticles, {
+      params: { slug: author.slug },
+      props: { author },
+      pageSize: 9,
+    });
+  });
 };
 
 const { author } = Astro.props;
-
-const allArticles = await getCollection('articles', ({ data }) => !data.draft);
-const authorArticles = allArticles
-  .filter((a) => a.data.author === author.slug)
-  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+const { page } = Astro.props;
 
 const crumbs = [
   { label: 'Home', href: '/' },
@@ -40,7 +46,7 @@ const schemas = [
 ---
 
 <BaseLayout
-  title={`${author.name} - CRM Beat`}
+  title={`${author.name}${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ''} - CRM Beat`}
   description={author.bio}
   schemas={schemas}
 >
@@ -74,11 +80,11 @@ const schemas = [
       </a>
     </div>
 
-    {authorArticles.length > 0 && (
+    {page.data.length > 0 && (
       <div class="author-articles">
         <h2>Articles by {author.name}</h2>
         <div class="article-grid">
-          {authorArticles.map((article) => (
+          {page.data.map((article: any) => (
             <ArticleCard
               title={article.data.title}
               description={article.data.description}
@@ -90,6 +96,8 @@ const schemas = [
             />
           ))}
         </div>
+
+        <Pagination page={page} baseUrl={`/author/${author.slug}`} />
       </div>
     )}
   </section>
