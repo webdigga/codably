@@ -34,7 +34,7 @@ Adoption problems are almost always a strategy problem in disguise. The CRM may 
 
 ### What to do about it
 
-Start by talking to the people who are not using the system. Their objections will tell you more than any dashboard. Then simplify: strip the CRM back to the essential fields and actions the team actually needs. Relaunch with clear expectations, proper training, and visible leadership commitment. Our guide on [setting CRM goals that drive business results](/data-reporting/setting-crm-goals-that-drive-business-results) covers how to connect daily CRM activity to outcomes the team cares about.
+Start by talking to the people who are not using the system. Their objections will tell you more than any dashboard. Then simplify: strip the CRM back to the essential fields and actions the team actually needs. Relaunch with clear expectations, proper training, and visible leadership commitment. Our guide on [setting CRM goals that drive business results](/business-growth/setting-crm-goals-that-drive-business-results) covers how to connect daily CRM activity to outcomes the team cares about.
 
 ## 2. Dirty, duplicated, or outdated data
 
@@ -76,7 +76,7 @@ Workarounds emerge when the CRM does not support the way people actually work. T
 
 ### What to do about it
 
-Audit the workarounds. Ask every team member: "What do you track outside the CRM, and why?" Each answer is a signal pointing to a gap in your CRM configuration or workflow. Fix the gaps, and the workarounds disappear. This is also a good time to assess whether your platform still fits your needs; our guide on [when to upgrade your CRM](/getting-started/when-is-the-right-time-to-upgrade-your-crm) can help with that evaluation.
+Audit the workarounds. Ask every team member: "What do you track outside the CRM, and why?" Each answer is a signal pointing to a gap in your CRM configuration or workflow. Fix the gaps, and the workarounds disappear. This is also a good time to assess whether your platform still fits your needs; our guide on [when to upgrade your CRM](/business-growth/when-is-the-right-time-to-upgrade-your-crm) can help with that evaluation.
 
 ## 5. Client complaints or declining satisfaction
 
@@ -230,7 +230,7 @@ Sometimes the problem genuinely is the platform. If your CRM cannot support the 
 - Reporting is too limited to track the metrics that matter
 - The system cannot scale with your team size or data volume
 
-If this sounds familiar, our guide on [when to upgrade your CRM](/getting-started/when-is-the-right-time-to-upgrade-your-crm) walks through the evaluation process in detail.
+If this sounds familiar, our guide on [when to upgrade your CRM](/business-growth/when-is-the-right-time-to-upgrade-your-crm) walks through the evaluation process in detail.
 
 ## Strategy before software
 

@@ -42,7 +42,7 @@ Connect the CRM to problems your team already experiences:
 - Hours wasted searching emails for a conversation from three months ago
 - Clients falling through the cracks during handovers
 
-If your team has experienced the pain of [not having a CRM](/getting-started/the-real-cost-of-not-having-a-crm), they will be far more receptive to learning one.
+If your team has experienced the pain of [not having a CRM](/business-growth/the-real-cost-of-not-having-a-crm), they will be far more receptive to learning one.
 
 ## Build a training plan, not a training day
 

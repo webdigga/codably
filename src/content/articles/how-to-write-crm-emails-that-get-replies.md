@@ -87,7 +87,7 @@ Every CRM email tool lets you insert a first name. That is the bare minimum, and
 
 **Mention their business.** If your CRM stores company name, industry, or recent activity, reference it. "I noticed your team has grown since we last spoke" feels personal because it is personal.
 
-**Use CRM tags and segments.** If you have [tagged your contacts effectively](/getting-started/how-to-use-crm-tags-and-custom-fields-effectively), you can tailor your messaging to their specific situation. A client tagged as "recently onboarded" gets a different email than one tagged as "at risk."
+**Use CRM tags and segments.** If you have [tagged your contacts effectively](/data-reporting/how-to-use-crm-tags-and-custom-fields-effectively), you can tailor your messaging to their specific situation. A client tagged as "recently onboarded" gets a different email than one tagged as "at risk."
 
 The goal is to make every email feel like it was written specifically for that one person. Your CRM has the data to make this possible at scale.
 

@@ -155,7 +155,7 @@ Free CRMs are not a bad choice for everyone. They make genuine sense in certain 
 
 - **You are just starting out** and have fewer than 100 contacts. A free CRM gives you structure without financial risk.
 - **You are a solo operator** with a simple workflow. If your sales process has three or four stages and you manage everything yourself, a free tier may cover your needs for a long time.
-- **You want to test before you commit.** Using a free tier to build the CRM habit and learn what features matter to you is a smart strategy before investing in a paid plan. Our guide on [how to evaluate a CRM before you commit](/getting-started/how-to-evaluate-a-crm-before-you-commit) walks through this process.
+- **You want to test before you commit.** Using a free tier to build the CRM habit and learn what features matter to you is a smart strategy before investing in a paid plan. Our guide on [how to evaluate a CRM before you commit](/tools-tech/how-to-evaluate-a-crm-before-you-commit) walks through this process.
 - **Your budget is genuinely zero.** If funds are tight, a free CRM is infinitely better than no CRM. It captures data, provides structure, and builds habits you will carry forward.
 
 ## When it is time to pay

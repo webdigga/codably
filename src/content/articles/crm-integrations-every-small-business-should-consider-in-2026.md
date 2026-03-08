@@ -27,7 +27,7 @@ The average small business uses between eight and twelve software tools daily. W
 
 CRM integrations solve this by creating a single source of truth. When your tools talk to each other, you stop duplicating data entry, reduce errors, and make faster decisions because the information is already where you need it.
 
-If you are already using a few [CRM integrations that save time](/tools-tech/crm-integrations-that-save-small-businesses-time), this guide will help you identify what else is worth connecting in 2026.
+If you are already using a few [CRM integrations that save time](/getting-started/crm-integrations-that-save-small-businesses-time), this guide will help you identify what else is worth connecting in 2026.
 
 ## Integration categories at a glance
 
@@ -103,7 +103,7 @@ WhatsApp Business integration has become increasingly important for UK small bus
 - **Quick CRM actions from chat** (update a deal, log a note, create a task without leaving Slack or Teams)
 - **Message logging** so client WhatsApp conversations appear on the CRM timeline
 
-If your team works remotely, combining these integrations with [mobile CRM access](/tools-tech/mobile-crm-managing-client-relationships-on-the-go) ensures nobody misses critical updates regardless of where they are.
+If your team works remotely, combining these integrations with [mobile CRM access](/getting-started/mobile-crm-managing-client-relationships-on-the-go) ensures nobody misses critical updates regardless of where they are.
 
 ## Social media: LinkedIn and Meta Business Suite
 

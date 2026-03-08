@@ -118,7 +118,7 @@ If you are still choosing a platform, let team members trial two or three option
 
 Ask the team what information they actually need to do their jobs. You will be surprised how often a CRM is configured based on what management wants to see rather than what the team needs to work effectively. Bridging this gap early prevents the "this was built for someone else" objection.
 
-For a detailed walkthrough on setting up training that sticks, see our guide on [how to train your team on a new CRM](/getting-started/how-to-train-your-team-on-a-new-crm).
+For a detailed walkthrough on setting up training that sticks, see our guide on [how to train your team on a new CRM](/team-people/how-to-train-your-team-on-a-new-crm).
 
 ## Make it easy to start
 
@@ -138,7 +138,7 @@ That is it for the first two weeks. Everything else can come later.
 
 Audit the CRM before rollout and strip out anything the team will not use in the first month. Hide unused fields, simplify views, and remove features that add noise without value. A clean, focused interface makes the difference between a system that feels helpful and one that feels hostile.
 
-If your team has previously struggled with adoption, our article on [getting your team to actually use your CRM](/team-people/how-to-get-your-team-to-actually-use-your-crm) covers the broader tactical approach.
+If your team has previously struggled with adoption, our article on [getting your team to actually use your CRM](/business-growth/how-to-get-your-team-to-actually-use-your-crm) covers the broader tactical approach.
 
 ## Address objections honestly
 

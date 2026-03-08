@@ -48,7 +48,7 @@ Monday morning is when you set up the week for success. Before you open your inb
 3. **Identify the week's priorities.** Which three to five deals or client relationships need the most attention this week? Tag or flag them.
 4. **Schedule follow-ups.** Create specific tasks for any follow-ups due this week. Assign a day and time, not just "this week."
 
-This session replaces the vague feeling of "I should probably follow up with someone" with a concrete plan. It also connects directly to [setting CRM goals that drive results](/data-reporting/setting-crm-goals-that-drive-business-results), because you are reviewing progress towards your targets every single week.
+This session replaces the vague feeling of "I should probably follow up with someone" with a concrete plan. It also connects directly to [setting CRM goals that drive results](/business-growth/setting-crm-goals-that-drive-business-results), because you are reviewing progress towards your targets every single week.
 
 ### Tuesday to Thursday: Daily quick updates (10 to 15 minutes)
 
