@@ -9,8 +9,8 @@ export async function GET(context: APIContext) {
   );
 
   return rss({
-    title: 'CRM Beat',
-    description: 'Practical CRM strategy for small UK businesses.',
+    title: 'Codably',
+    description: 'Practical developer productivity advice. Better tools, sharper workflows, real results.',
     site: context.site!.href,
     items: sorted.map((article) => ({
       title: article.data.title,

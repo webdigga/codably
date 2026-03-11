@@ -3,7 +3,7 @@ export interface Props {
   label?: string;
 }
 
-const { label = 'Subscribe to CRM Beat' } = Astro.props;
+const { label = 'Subscribe to Codably' } = Astro.props;
 ---
 
 <button class="newsletter-trigger" type="button">{label}</button>
@@ -12,14 +12,14 @@ const { label = 'Subscribe to CRM Beat' } = Astro.props;
   <div class="newsletter-modal-backdrop"></div>
   <div class="newsletter-modal-dialog">
     <div class="newsletter-modal-header">
-      <h2 class="newsletter-modal-title">Get CRM tips in your inbox</h2>
+      <h2 class="newsletter-modal-title">Get coding tips in your inbox</h2>
       <button class="newsletter-modal-close" type="button" aria-label="Close">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="4" x2="16" y2="16"/><line x1="16" y1="4" x2="4" y2="16"/></svg>
       </button>
     </div>
-    <p class="newsletter-modal-desc">Practical advice for small businesses, delivered to your inbox. No spam, no jargon.</p>
-    <p class="newsletter-modal-consent">By subscribing, you agree to receive CRM tips and updates from CRM Beat. We store your email address securely and you can unsubscribe at any time.</p>
-    <div class="newsletter-modal-form" id="kabooly-form-15"></div>
+    <p class="newsletter-modal-desc">Practical coding advice, delivered to your inbox. No spam, no jargon.</p>
+    <p class="newsletter-modal-consent">By subscribing, you agree to receive coding tips and updates from Codably. We store your email address securely and you can unsubscribe at any time.</p>
+    <div class="newsletter-modal-form" id="kabooly-form-17"></div>
   </div>
 </div>
 
@@ -33,7 +33,7 @@ const { label = 'Subscribe to CRM Beat' } = Astro.props;
     font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
     color: #ffffff;
-    background: #c9452a;
+    background: #ec4899;
     border: none;
     border-radius: var(--radius-md);
     cursor: pointer;
@@ -41,7 +41,7 @@ const { label = 'Subscribe to CRM Beat' } = Astro.props;
   }
 
   .newsletter-trigger:hover {
-    background: #b33d23;
+    background: #db2777;
   }
 
   .newsletter-modal {
@@ -143,10 +143,10 @@ const { label = 'Subscribe to CRM Beat' } = Astro.props;
       document.body.style.overflow = 'hidden';
 
       if (!iframeLoaded) {
-        const formContainer = modal.querySelector('#kabooly-form-15');
+        const formContainer = modal.querySelector('#kabooly-form-17');
         if (formContainer && !formContainer.querySelector('iframe')) {
           const iframe = document.createElement('iframe');
-          const baseUrl = 'https://crm.kabooly.com/embed/form/15';
+          const baseUrl = 'https://crm.kabooly.com/embed/form/17';
           const params: string[] = [];
           const urlParams = new URLSearchParams(window.location.search);
           ['utm_source', 'utm_campaign', 'utm_medium', 'utm_content', 'utm_term', 'gclid', 'fbclid'].forEach((param) => {
@@ -159,7 +159,7 @@ const { label = 'Subscribe to CRM Beat' } = Astro.props;
           iframe.style.minHeight = '400px';
           iframe.onload = () => {
             window.addEventListener('message', (e) => {
-              if (e.data.formId === '15' && e.data.height) {
+              if (e.data.formId === '17' && e.data.height) {
                 iframe.style.height = e.data.height + 'px';
               }
             });

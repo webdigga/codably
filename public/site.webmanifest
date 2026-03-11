@@ -1,6 +1,6 @@
 {
-  "name": "CRM Beat",
-  "short_name": "Beat",
+  "name": "Codably",
+  "short_name": "Codably",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#e85d3a",
+  "theme_color": "#ec4899",
   "background_color": "#ffffff",
   "display": "standalone"
 }

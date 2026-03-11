@@ -56,8 +56,8 @@ const schemas = [
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: `Articles tagged "${tagName}"`,
-    description: `All CRM Beat articles tagged with "${tagName}".`,
-    url: `https://crmbeat.com/tag/${tag}`,
+    description: `All Codably articles tagged with "${tagName}".`,
+    url: `https://codably.dev/tag/${tag}`,
   },
 ];
 
@@ -67,7 +67,7 @@ const nextUrl = page.url.next || undefined;
 
 <BaseLayout
   title={pageTitle}
-  description={`All CRM Beat articles tagged with "${tagName}". Practical CRM advice for small UK businesses.`}
+  description={`All Codably articles tagged with "${tagName}". Practical coding advice and tutorials.`}
   schemas={schemas}
   prevUrl={prevUrl}
   nextUrl={nextUrl}

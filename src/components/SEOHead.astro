@@ -13,8 +13,8 @@ export interface Props {
 
 const { title, description, canonical, ogImage, ogType = 'website', schemas = [], prevUrl, nextUrl, noindex = false } = Astro.props;
 
-const siteTitle = 'CRM Beat';
-const siteUrl = 'https://crmbeat.com';
+const siteTitle = 'Codably';
+const siteUrl = 'https://codably.dev';
 const defaultOgImage = `${siteUrl}/images/og-default.jpg`;
 const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
 
@@ -33,7 +33,7 @@ const resolvedOgImage = ogImage || defaultOgImage;
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="google-site-verification" content="5Fx3FjL6IawKwO6WVH-kKGLcYpDXKxwMh2c24plWMlE" />
+<meta name="google-site-verification" content="" />
 <title>{fullTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonicalUrl} />
@@ -46,7 +46,7 @@ const resolvedOgImage = ogImage || defaultOgImage;
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="CRM Beat" />
+<meta name="apple-mobile-web-app-title" content="Codably" />
 <link rel="manifest" href="/site.webmanifest" />
 
 <!-- Google Fonts -->
@@ -56,7 +56,7 @@ const resolvedOgImage = ogImage || defaultOgImage;
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <!-- RSS -->
-<link rel="alternate" type="application/rss+xml" title="CRM Beat RSS Feed" href="/rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="Codably RSS Feed" href="/rss.xml" />
 
 <!-- Open Graph -->
 <meta property="og:title" content={fullTitle} />

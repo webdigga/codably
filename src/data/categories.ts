@@ -6,63 +6,63 @@ export interface Category {
 
 export const categories: Category[] = [
   {
-    slug: 'getting-started',
-    name: 'Getting Started',
-    description: 'Everything you need to know to choose, set up, and start using a CRM for your small business.',
+    slug: 'ai-tools',
+    name: 'AI Tools',
+    description: 'Practical guides to AI coding assistants, copilots, and automation tools that help you ship faster.',
   },
   {
-    slug: 'sales-pipeline',
-    name: 'Sales Pipeline',
-    description: 'Build and manage a sales pipeline that turns enquiries into paying clients.',
+    slug: 'workflows',
+    name: 'Workflows',
+    description: 'Optimise your development workflow from commit to deploy with better processes and habits.',
   },
   {
-    slug: 'client-retention',
-    name: 'Client Retention',
-    description: 'Keep your existing clients happy, engaged, and coming back for more.',
+    slug: 'devops',
+    name: 'DevOps',
+    description: 'CI/CD pipelines, deployment strategies, infrastructure, and everything that keeps your code running.',
   },
   {
-    slug: 'marketing-automation',
-    name: 'Marketing Automation',
-    description: 'Automate your marketing to save time and stay in front of your audience.',
-  },
-  {
-    slug: 'business-growth',
-    name: 'Business Growth',
-    description: 'Scale your business without losing the personal touch that won you clients in the first place.',
-  },
-  {
-    slug: 'industry-tips',
-    name: 'Industry Tips',
-    description: 'CRM advice tailored to specific trades, professions, and service industries.',
-  },
-  {
-    slug: 'data-reporting',
-    name: 'Data & Reporting',
-    description: 'Make sense of your CRM data with reports that drive better decisions.',
-  },
-  {
-    slug: 'team-people',
-    name: 'Team & People',
-    description: 'Get your team on board with CRM, build better habits, and create a culture that puts clients first.',
+    slug: 'code-quality',
+    name: 'Code Quality',
+    description: 'Write cleaner code with better testing, refactoring, and review practices.',
   },
   {
     slug: 'tools-tech',
     name: 'Tools & Tech',
-    description: 'Compare CRM tools, set up integrations, and make the most of the technology behind your business.',
+    description: 'Reviews, comparisons, and deep dives into the tools and technologies developers use every day.',
   },
   {
     slug: 'productivity',
     name: 'Productivity',
-    description: 'Work smarter with better workflows, time management, and systems that keep your business running smoothly.',
+    description: 'Work smarter with time management, focus techniques, and systems that help you get more done.',
   },
   {
-    slug: 'communication',
-    name: 'Communication',
-    description: 'Improve how you communicate with clients, from proposals and follow-ups to everyday conversations.',
+    slug: 'collaboration',
+    name: 'Collaboration',
+    description: 'Better code reviews, pair programming, documentation, and team communication practices.',
   },
   {
-    slug: 'strategy',
-    name: 'Strategy',
-    description: 'Plan ahead with practical advice on pricing, positioning, and long-term business decisions.',
+    slug: 'architecture',
+    name: 'Architecture',
+    description: 'Software design patterns, system architecture, and making the right technical decisions.',
+  },
+  {
+    slug: 'career',
+    name: 'Career',
+    description: 'Grow your developer career with advice on skills, interviews, leadership, and professional development.',
+  },
+  {
+    slug: 'frontend',
+    name: 'Frontend',
+    description: 'Modern frontend development including frameworks, performance, accessibility, and best practices.',
+  },
+  {
+    slug: 'backend',
+    name: 'Backend',
+    description: 'Server-side development, APIs, databases, and building robust backend systems.',
+  },
+  {
+    slug: 'open-source',
+    name: 'Open Source',
+    description: 'Contributing to open source, maintaining projects, and building in the open.',
   },
 ];

@@ -46,7 +46,7 @@ const authorData = authors[article.data.author] || {
   linkedin: '',
 };
 
-const url = `https://crmbeat.com/${article.data.category}/${article.id}`;
+const url = `https://codably.dev/${article.data.category}/${article.id}`;
 
 const schemas = [
   {
@@ -64,11 +64,11 @@ const schemas = [
     },
     publisher: {
       '@type': 'Organization',
-      name: 'CRM Beat',
-      url: 'https://crmbeat.com',
+      name: 'Codably',
+      url: 'https://codably.dev',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://crmbeat.com/images/crm-beat-logo.png',
+        url: 'https://codably.dev/images/codably-logo.png',
         width: 535,
         height: 535,
       },

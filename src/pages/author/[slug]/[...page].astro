@@ -38,15 +38,15 @@ const schemas = [
     name: author.name,
     jobTitle: author.role,
     description: author.bio,
-    image: `https://crmbeat.com${author.avatar}`,
-    url: `https://crmbeat.com/author/${author.slug}`,
+    image: `https://codably.dev${author.avatar}`,
+    url: `https://codably.dev/author/${author.slug}`,
     sameAs: [author.linkedin],
   },
 ];
 ---
 
 <BaseLayout
-  title={`${author.name}${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ''} - CRM Beat`}
+  title={`${author.name}${page.currentPage > 1 ? ` - Page ${page.currentPage}` : ''} - Codably`}
   description={author.bio}
   schemas={schemas}
 >

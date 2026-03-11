@@ -15,40 +15,40 @@ function getArticle(slug: string) {
 const sections = [
   {
     number: 1,
-    title: 'Understanding CRM',
-    intro: 'Before you choose a tool or change a process, it helps to understand what a CRM actually does and why it matters for a small business.',
+    title: 'Getting started',
+    intro: 'New to developer productivity? These articles cover the fundamentals of building better engineering habits and choosing the right tools.',
     slugs: [
-      'what-is-a-crm-and-why-does-your-small-business-need-one',
-      'the-real-cost-of-not-having-a-crm',
+      'why-developer-productivity-matters-more-than-you-think',
+      'the-developers-guide-to-deep-work',
     ],
   },
   {
     number: 2,
-    title: 'Getting set up',
-    intro: 'Ready to take the plunge? These guides walk you through choosing the right system, configuring it properly, and migrating your existing data.',
+    title: 'Tools and workflows',
+    intro: 'The right tools and workflows can transform how you work. These guides help you set up an environment that works for you.',
     slugs: [
-      'how-to-choose-the-right-crm-for-your-business',
-      'setting-up-your-crm-a-step-by-step-guide',
-      'how-to-move-from-spreadsheets-to-a-crm',
+      'terminal-tools-every-developer-should-know',
+      'how-to-build-a-ci-cd-pipeline-that-actually-works',
+      'ai-coding-assistants-a-practical-guide',
     ],
   },
   {
     number: 3,
-    title: 'Growing with your CRM',
-    intro: 'Once you are up and running, these articles help you build a proper sales pipeline and keep the clients you have already won.',
+    title: 'Code quality and collaboration',
+    intro: 'Writing clean code and working well with others is what separates good engineers from great ones.',
     slugs: [
-      'how-to-build-a-sales-pipeline-that-actually-works',
-      'why-client-retention-matters-more-than-acquisition',
-      'scaling-your-business-without-losing-the-personal-touch',
+      'code-reviews-that-dont-waste-time',
+      'technical-debt-when-to-fix-it-and-when-to-leave-it',
+      'writing-documentation-developers-actually-read',
     ],
   },
   {
     number: 4,
-    title: 'Going deeper',
-    intro: 'When you are comfortable with the basics, automation and reporting will help you save time and make better decisions.',
+    title: 'Growing your career',
+    intro: 'Whether you want to go deep technically or move into leadership, these articles help you plan your next step.',
     slugs: [
-      'email-sequences-every-small-business-should-set-up',
-      'crm-reports-every-small-business-should-run-monthly',
+      'the-senior-developer-mindset',
+      'from-developer-to-tech-lead-what-actually-changes',
     ],
   },
 ];
@@ -61,14 +61,14 @@ const crumbs = [
 
 <BaseLayout
   title="Start Here"
-  description="New to CRM? Start here. A curated reading path to help your small business understand, choose, and get the most from a CRM."
+  description="New to Codably? Start here. A curated reading path covering developer productivity, tools, workflows, and career growth."
 >
   <section class="container start-here">
     <Breadcrumbs crumbs={crumbs} />
 
     <div class="page-header">
       <h1>Start here</h1>
-      <p>New to CRM? Follow this reading path from the basics through to automation. Each section builds on the last, so you can learn at your own pace.</p>
+      <p>New to Codably? Follow this reading path from the basics through to advanced topics. Each section builds on the last, so you can learn at your own pace.</p>
     </div>
 
     {sections.map((section) => {
@@ -85,19 +85,21 @@ const crumbs = [
               <p class="section-intro">{section.intro}</p>
             </div>
           </div>
-          <div class="article-grid">
-            {articles.map((article) => (
-              <ArticleCard
-                title={article.data.title}
-                description={article.data.description}
-                slug={article.id}
-                category={article.data.category}
-                author={article.data.author}
-                publishDate={article.data.publishDate}
-                wordCount={article.body ? article.body.split(/\s+/).length : 0}
-              />
-            ))}
-          </div>
+          {articles.length > 0 && (
+            <div class="article-grid">
+              {articles.map((article) => (
+                <ArticleCard
+                  title={article.data.title}
+                  description={article.data.description}
+                  slug={article.id}
+                  category={article.data.category}
+                  author={article.data.author}
+                  publishDate={article.data.publishDate}
+                  wordCount={article.body ? article.body.split(/\s+/).length : 0}
+                />
+              ))}
+            </div>
+          )}
         </div>
       );
     })}

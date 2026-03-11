@@ -20,14 +20,14 @@ for (const file of fs.readdirSync(articlesDir)) {
 
   const date = dateModified ? dateModified[1] : publishDate ? publishDate[1] : null;
   if (date && category) {
-    articleDates.set(`https://crmbeat.com/${category[1]}/${slug}`, date);
+    articleDates.set(`https://codably.dev/${category[1]}/${slug}`, date);
   }
 }
 
 const buildDate = new Date().toISOString().split('T')[0];
 
 export default defineConfig({
-  site: 'https://crmbeat.com',
+  site: 'https://codably.dev',
   output: 'static',
   trailingSlash: 'never',
   build: {

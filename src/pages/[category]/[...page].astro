@@ -42,7 +42,7 @@ const schemas = [
     '@type': 'CollectionPage',
     name: category.name,
     description: category.description,
-    url: `https://crmbeat.com/${category.slug}`,
+    url: `https://codably.dev/${category.slug}`,
   },
   {
     '@context': 'https://schema.org',
@@ -50,7 +50,7 @@ const schemas = [
     itemListElement: page.data.map((article: any, i: number) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `https://crmbeat.com/${article.data.category}/${article.id}`,
+      url: `https://codably.dev/${article.data.category}/${article.id}`,
     })),
   },
 ];

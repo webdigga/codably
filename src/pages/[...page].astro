@@ -16,20 +16,20 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 };
 
 const { page } = Astro.props;
-const pageTitle = page.currentPage > 1 ? `Page ${page.currentPage}` : 'CRM Beat';
+const pageTitle = page.currentPage > 1 ? `Page ${page.currentPage}` : 'Codably';
 
 const schemas = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'CRM Beat',
-    url: 'https://crmbeat.com',
-    description: 'Practical CRM strategy for small UK businesses.',
+    name: 'Codably',
+    url: 'https://codably.dev',
+    description: 'Practical developer productivity advice. Better tools, sharper workflows, real results.',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://crmbeat.com/search?q={search_term_string}',
+        urlTemplate: 'https://codably.dev/search?q={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },
@@ -37,9 +37,9 @@ const schemas = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'CRM Beat',
-    url: 'https://crmbeat.com',
-    logo: 'https://crmbeat.com/images/crm-beat-logo.png',
+    name: 'Codably',
+    url: 'https://codably.dev',
+    logo: 'https://codably.dev/images/codably-logo.png',
     sameAs: [],
   },
   {
@@ -48,7 +48,7 @@ const schemas = [
     itemListElement: page.data.slice(0, 10).map((article: any, i: number) => ({
       '@type': 'ListItem',
       position: i + 1,
-      url: `https://crmbeat.com/${article.data.category}/${article.id}`,
+      url: `https://codably.dev/${article.data.category}/${article.id}`,
     })),
   },
 ];
@@ -60,15 +60,15 @@ const nextUrl = page.url.next || undefined;
 
 <BaseLayout
   title={pageTitle}
-  description="Practical CRM strategy for small UK businesses. Honest advice, no jargon, real results."
+  description="Practical developer productivity advice. Better tools, sharper workflows, real results."
   schemas={schemas}
   prevUrl={prevUrl}
   nextUrl={nextUrl}
 >
   <section class="container homepage">
     <div class="homepage-header">
-      <h1>CRM strategy that works</h1>
-      <p>Practical advice for small UK businesses. No jargon, no fluff.</p>
+      <h1>Developer productivity that works</h1>
+      <p>Practical advice for engineers who want to ship better software, faster.</p>
     </div>
 
     <SearchBar />
