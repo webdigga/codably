@@ -126,7 +126,7 @@ With observability, your response is different. You start with the symptom, then
 
 Imagine your API's p99 latency has spiked. Monitoring tells you it happened. Observability lets you discover that the spike only affects users in a specific region, only on requests that hit a particular microservice, and only when that service calls a third-party API that started returning slower responses after their own deployment twenty minutes ago.
 
-That level of diagnosis simply is not possible with predefined dashboards alone. According to the <a href="https://www.honeycomb.io/research/observability-maturity" target="_blank" rel="noopener noreferrer">Honeycomb Observability Maturity Report ↗</a>, teams with mature observability practices resolve incidents up to 70% faster than those relying on traditional monitoring alone.
+That level of diagnosis simply is not possible with predefined dashboards alone. According to the <a href="https://www.honeycomb.io/blog/honeycomb-releases-the-2021-observability-maturity-community-research-findings" target="_blank" rel="noopener noreferrer">Honeycomb Observability Maturity Report ↗</a>, teams with mature observability practices resolve incidents up to 70% faster than those relying on traditional monitoring alone.
 
 ## Building Observable Systems
 

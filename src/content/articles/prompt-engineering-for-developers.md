@@ -278,7 +278,7 @@ If the first result is not quite right, refine the prompt rather than starting o
 
 ### Over-Relying on AI for Learning
 
-AI tools are excellent for productivity but mediocre for deep learning. If you are learning a new concept, reading documentation, building toy projects, and making mistakes teaches you more than asking an AI to explain and generate code. Use AI to accelerate work you already understand, not to skip understanding entirely. As the <a href="https://www.anthropic.com/news/anthropic-guidelines-spec" target="_blank" rel="noopener noreferrer">Anthropic research on AI best practices ↗</a> suggests, AI works best as a collaborator for experienced practitioners rather than a replacement for foundational knowledge.
+AI tools are excellent for productivity but mediocre for deep learning. If you are learning a new concept, reading documentation, building toy projects, and making mistakes teaches you more than asking an AI to explain and generate code. Use AI to accelerate work you already understand, not to skip understanding entirely. As the <a href="https://www.anthropic.com/news/claude-new-constitution" target="_blank" rel="noopener noreferrer">Anthropic research on AI best practices ↗</a> suggests, AI works best as a collaborator for experienced practitioners rather than a replacement for foundational knowledge.
 
 ## Building a Prompt Library
 

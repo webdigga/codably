@@ -162,7 +162,7 @@ This cannot be overstated. Read every line of AI-generated code before it enters
 - Unnecessary complexity or over-engineering
 - Incorrect or outdated API usage
 
-This review process is essentially a [code review](/collaboration/code-reviews-that-dont-waste-time), and the same principles apply. The <a href="https://www.sonarsource.com/solutions/ai-code-assurance/" target="_blank" rel="noopener noreferrer">SonarSource AI Code Assurance tools ↗</a> can help automate parts of this review for AI-generated code.
+This review process is essentially a [code review](/collaboration/code-reviews-that-dont-waste-time), and the same principles apply. The <a href="https://www.sonarsource.com/solutions/ai/ai-code-assurance/" target="_blank" rel="noopener noreferrer">SonarSource AI Code Assurance tools ↗</a> can help automate parts of this review for AI-generated code.
 
 ### Know When to Stop
 

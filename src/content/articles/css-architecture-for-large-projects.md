@@ -31,7 +31,7 @@ CSS is global by default. Every rule you write can potentially affect every elem
 
 Without architecture, teams fall into predictable patterns. New styles are added at the bottom of the file. Specificity increases over time as developers use more targeted selectors to override existing rules. Dead CSS accumulates because nobody can confidently determine which rules are still in use. Eventually, the team agrees that the CSS "needs a rewrite," and the cycle begins again.
 
-According to research from <a href="https://httparchive.org/reports/state-of-css" target="_blank" rel="noopener noreferrer">HTTP Archive's State of CSS report ↗</a>, the median CSS weight on the web has grown steadily year on year, with the top 10% of sites shipping over 800KB of CSS. Architecture breaks this cycle by providing structure, naming conventions, and clear ownership of styles. Enforcing these conventions with [automated linters and formatters](/code-quality/automating-code-quality-with-linters-and-formatters) is what makes them stick long-term.
+According to research from <a href="https://almanac.httparchive.org/en/2022/css" target="_blank" rel="noopener noreferrer">HTTP Archive's State of CSS report ↗</a>, the median CSS weight on the web has grown steadily year on year, with the top 10% of sites shipping over 800KB of CSS. Architecture breaks this cycle by providing structure, naming conventions, and clear ownership of styles. Enforcing these conventions with [automated linters and formatters](/code-quality/automating-code-quality-with-linters-and-formatters) is what makes them stick long-term.
 
 ## Naming Conventions: BEM
 

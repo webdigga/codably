@@ -102,7 +102,7 @@ export const config = {
 };
 ```
 
-Libraries like <a href="https://github.com/colinhacks/zod" target="_blank" rel="noopener noreferrer">Zod ↗</a> or <a href="https://github.com/envalid/envalid" target="_blank" rel="noopener noreferrer">envalid ↗</a> take this further with type coercion and format validation. If `PORT` should be a number and `DATABASE_URL` should be a valid URL, validate that at startup rather than discovering it when the first request fails.
+Libraries like <a href="https://github.com/colinhacks/zod" target="_blank" rel="noopener noreferrer">Zod ↗</a> or <a href="https://github.com/af/envalid" target="_blank" rel="noopener noreferrer">envalid ↗</a> take this further with type coercion and format validation. If `PORT` should be a number and `DATABASE_URL` should be a valid URL, validate that at startup rather than discovering it when the first request fails.
 
 ## Naming conventions
 

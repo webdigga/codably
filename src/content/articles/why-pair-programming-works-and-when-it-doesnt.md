@@ -37,7 +37,7 @@ Pairing eliminates this delay. Design problems are caught as they emerge. The na
 
 On most teams, knowledge is concentrated. One person understands the payment system. Another knows the deployment pipeline. A third is the only one who can debug the notification service. This creates bottlenecks, on-call nightmares, and real risk if someone leaves.
 
-Pairing distributes knowledge organically. After a week of pairing across the team, multiple people understand each part of the system. This does not happen through documentation or presentations. It happens through the shared experience of solving problems together. Research from <a href="https://www.microsoft.com/en-us/research/publication/the-costs-and-benefits-of-pair-programming/" target="_blank" rel="noopener noreferrer">Microsoft Research ↗</a> found that while pairing does increase initial development time, the resulting code tends to have significantly fewer defects.
+Pairing distributes knowledge organically. After a week of pairing across the team, multiple people understand each part of the system. This does not happen through documentation or presentations. It happens through the shared experience of solving problems together. Research from <a href="https://www.microsoft.com/en-us/research/publication/pair-programming-whats-in-it-for-me/" target="_blank" rel="noopener noreferrer">Microsoft Research ↗</a> found that while pairing does increase initial development time, the resulting code tends to have significantly fewer defects.
 
 ### Sustained Focus
 
