@@ -220,7 +220,7 @@ When you cache data from multiple sources or cache denormalised views, updates t
 
 - Keep cache entries small and focused. Cache individual entities rather than pre-joined views where possible.
 - Use event-based invalidation to update related cache entries when the source data changes.
-- Accept eventual consistency where it is tolerable, and use shorter TTLs where it is not. For building APIs that handle these consistency tradeoffs gracefully, see [building resilient APIs with retry and circuit breaker patterns](/backend/building-resilient-apis-with-retry-and-circuit-breaker-patterns).
+- Accept eventual consistency where it is tolerable, and use shorter TTLs where it is not. For building APIs that handle these consistency trade-offs gracefully, see [building resilient APIs with retry and circuit breaker patterns](/backend/building-resilient-apis-with-retry-and-circuit-breaker-patterns).
 
 ### Over-Caching
 
@@ -275,3 +275,5 @@ Before implementing caching in your application, work through this checklist:
 8. **Document your decisions.** Record the why behind each caching choice.
 
 Caching done well is invisible to users: the application simply feels fast. Caching done poorly creates subtle, intermittent bugs that are difficult to reproduce and diagnose. Take the time to choose the right strategy, implement it carefully, and monitor it continuously. Your users, your database, and your on-call team will all benefit.
+
+If you found this guide useful, explore more of our [backend articles](/backend) for practical advice on databases, APIs, and server-side development.
