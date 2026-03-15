@@ -11,7 +11,7 @@
 - **Tables:** Use nicely styled tables for tabular data
 - **SVG charts:** Create inline SVG charts/diagrams where applicable to visualise data
 - **Internal linking:** Link to other pages/posts on the same site
-- **External linking:** Link to authoritative external sources where relevant. External links must open in a new tab (`target="_blank" rel="noopener noreferrer"`) and include a small external link icon (e.g. `↗` or an SVG) so users know they are leaving the site. **Every external URL must be verified with a curl/fetch check (expecting a 200 status) before being added to an article.** If a URL returns a non-200 status, find a working alternative or omit the link. Do not add unverified URLs.
+- **External linking:** Link to authoritative external sources where relevant. External links must open in a new tab (`target="_blank" rel="noopener noreferrer"`) and include a small external link icon (e.g. `↗` or an SVG) so users know they are leaving the site. **Every external URL should be verified with a curl/fetch check (expecting a 200 status) before being added to an article.** If a URL returns a non-200 status, find a working alternative. If you cannot verify URLs (e.g. no network access), still include them but flag which ones were not verified so the user can check them.
 - **UK English:** Use UK spelling throughout (colour, organised, centralised, etc.)
 - **Heading hierarchy:** Proper H2 -> H3 nesting, never skip levels
 - **Meta description:** Under 160 characters, include the primary keyword
@@ -24,6 +24,7 @@
 - **Reading time:** Calculate based on ~230 words per minute
 - **No en/em dashes:** Never use en dashes (-) or em dashes (--) in blog content. Use commas, colons, semicolons, or rewrite the sentence instead
 - **Repo structure:** Always check an existing post in this repo before writing a new one
+- **Topical content:** Where possible, make blog content topical. If there is a big event or something notable in the calendar in the forthcoming days or weeks, reference it in the blog. This will not always be possible, so only do this when it makes sense. Always confirm the current date before referencing upcoming events — do not assume or guess the date.
 
 ## CSS
 - **Mobile first:** All CSS must be mobile first. Never use `max-width` media queries. Use `min-width` only.
