@@ -1,6 +1,6 @@
 ---
 title: "The Developer's Guide to API Rate Limiting"
-description: "A practical guide to API rate limiting for developers. Covers algorithms, implementation patterns, response headers, and best practices for building fair, resilient APIs."
+description: "A practical guide to API rate limiting. Covers algorithms, implementation patterns, response headers, and best practices for resilient APIs."
 publishDate: "2026-03-25"
 author: "david-white"
 category: "backend"
