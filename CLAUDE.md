@@ -47,7 +47,7 @@ Static editorial site covering developer productivity, tooling, and workflows.
 **Stack:** Astro (static), Cloudflare Pages, Cloudflare Pages Functions + KV (votes/comments API)
 
 ## Content
-- **Articles:** 52 articles across 12 categories
+- **Articles:** 53 articles across 12 categories
 - **Categories:** AI Tools, Workflows, DevOps, Code Quality, Tools & Tech, Productivity, Collaboration, Architecture, Career, Frontend, Backend, Open Source
 - **Authors:** David White (Editor, Codably), Jonny Rowse (Editor, Codably). Aim for a rough split across articles when writing new batches.
 - **publishDate:** Never set `publishDate` to a future date. Articles appear on the live site immediately after deploy, so a future date looks wrong to readers. Always use today's date or earlier.
