@@ -1,6 +1,6 @@
 ---
 title: "What to Build Over the Easter Bank Holiday: Weekend Project Ideas for Developers"
-description: "Four days, no standups, no sprint ceremonies. The Easter bank holiday is one of the best opportunities of the year for a focused side project. Here is how to use it well."
+description: "Four days, no standups, no sprint ceremonies. The Easter bank holiday is one of the best focused building opportunities of the year. Here is how to use it well."
 publishDate: "2026-03-27"
 author: "jonny-rowse"
 category: "productivity"

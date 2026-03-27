@@ -14,7 +14,7 @@
 - **External linking:** Link to authoritative external sources where relevant. External links must open in a new tab (`target="_blank" rel="noopener noreferrer"`) and include a small external link icon (e.g. `↗` or an SVG) so users know they are leaving the site. **Every external URL should be verified with a curl/fetch check (expecting a 200 status) before being added to an article.** If a URL returns a non-200 status, find a working alternative. If you cannot verify URLs (e.g. no network access), still include them but flag which ones were not verified so the user can check them.
 - **UK English:** Use UK spelling throughout (colour, organised, centralised, etc.)
 - **Heading hierarchy:** Proper H2 -> H3 nesting, never skip levels
-- **Meta description:** Under 160 characters, include the primary keyword
+- **Meta description:** The `description` frontmatter field is schema-validated with a **hard Zod limit of 160 characters** (`z.string().max(160)`). Exceeding this will fail the build. Always count characters before finalising. Include the primary keyword.
 - **Short paragraphs:** Max 3-4 sentences, scannable with subheadings and bullet points
 - **Primary keyword focus:** Each post should target a specific keyword/phrase
 - **Strong opening:** Hook the reader and summarise the value in the first 2-3 sentences (helps with AI answer extraction for AEO)
