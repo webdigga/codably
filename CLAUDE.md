@@ -73,7 +73,9 @@ Static editorial site covering developer productivity, tooling, and workflows.
 Create markdown files with correct frontmatter directly in `src/content/articles/`.
 
 ### Internal links
-Article URLs follow the pattern `/{category}/{slug}` where slug = filename (minus `.md`) and category = the `category` frontmatter field of the **target** article. When adding internal links, always verify the target article's actual category by checking its frontmatter. Never guess the category from the article title.
+Article URLs follow the pattern `/{category}/{slug}` where slug = filename (minus `.md`) and category = the `category` frontmatter field of the **target** article.
+
+**CRITICAL: Always `grep` or read the target article's frontmatter to confirm its `category` before writing the link. Never guess the category from the article title or topic. Guessing will produce broken links. This is a hard requirement, not a suggestion.**
 
 ## Brand
 - **Brand colour:** Pink #ec4899 (hover: #db2777)
