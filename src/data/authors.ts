@@ -36,4 +36,13 @@ export const authors: Record<string, Author> = {
     avatar: '/images/authors/gareth-clubb.avif',
     linkedin: 'https://www.linkedin.com/in/garethclubb/',
   },
+  'zubair-hasan': {
+    name: 'Zubair Hasan',
+    slug: 'zubair-hasan',
+    role: 'Editor, Codably',
+    bio: 'Zubair is a senior site reliability engineer with over two decades of experience in platform infrastructure and software development. He writes about DevOps, cloud architecture, and building systems that scale.',
+    fullBio: 'Zubair is a senior site reliability engineer with over two decades of experience in platform infrastructure and software development. He has worked across media, financial markets, energy, and the public sector, giving him a broad perspective on what it takes to keep complex systems running reliably.\n\nAt Codably, Zubair writes about DevOps, cloud architecture, CI/CD, and the practical side of platform engineering. His articles draw on hands-on experience with Kubernetes, Terraform, and large-scale cloud migrations across AWS and GCP.\n\nWhen he is not writing, Zubair is building infrastructure, defining SLOs, and helping engineering teams ship with confidence.',
+    avatar: '/images/authors/zubair-hasan.svg',
+    linkedin: 'https://www.linkedin.com/in/zubesh/',
+  },
 };
