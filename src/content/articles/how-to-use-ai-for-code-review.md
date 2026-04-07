@@ -1,6 +1,6 @@
 ---
 title: "How to Use AI for Code Review: A Practical Guide"
-description: "Learn how to use AI tools for code review effectively. Covers what AI catches, where it falls short, and how to build a review workflow that combines AI with human judgement."
+description: "Learn how to use AI for code review effectively. What AI catches, where it falls short, and how to build a workflow combining AI with human review."
 publishDate: "2026-04-07"
 author: "david-white"
 category: "ai-tools"
