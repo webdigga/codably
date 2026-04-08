@@ -3,6 +3,7 @@
 ## Blog Posts
 
 ### Blog quality guidelines
+- **GSC research:** Before writing, check Google Search Console (90-day lookback) for keyword opportunities and content gaps. GSC site URL: `https://codably.dev/`
 - **E-E-A-T:** Write with Google's E-E-A-T framework in mind (Experience, Expertise, Authoritativeness, Trustworthiness). Demonstrate first-hand experience where possible, cite credible sources, include author credentials, use accurate and up-to-date information, and avoid vague or unsubstantiated claims
 - **Author:** Always include author where the format supports it
 - **Schema:** Ensure the article has all correct structured data/schema markup
