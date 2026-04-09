@@ -263,6 +263,7 @@ h4 { font-size: var(--text-lg); }
 
 .prose pre code {
   background: none;
+  color: inherit !important;
   padding: 0;
 }
 

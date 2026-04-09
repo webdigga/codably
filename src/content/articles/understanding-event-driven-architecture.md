@@ -91,7 +91,7 @@ Not all event-driven systems are the same. Martin Fowler identifies <a href="htt
 
 The simplest pattern. A service emits an event to notify others that something happened. The event contains minimal data, typically just an identifier and a type. Consumers that need more detail call back to the source service.
 
-```
+```json
 // Event payload: minimal
 {
   "type": "OrderPlaced",
@@ -108,7 +108,7 @@ The simplest pattern. A service emits an event to notify others that something h
 
 The event contains all the data consumers need, so they do not need to call back. Consumers build their own local copy of the data they care about.
 
-```
+```json
 // Event payload: full state
 {
   "type": "OrderPlaced",
