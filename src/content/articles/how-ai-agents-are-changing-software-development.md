@@ -108,23 +108,18 @@ This is why review remains critical. An agent is a productivity tool, not a repl
   <rect x="85" y="65" width="75" height="205" rx="4" fill="#22c55e" opacity="0.85"/>
   <text x="122" y="285" text-anchor="middle" font-size="10" fill="#334155">Migrations</text>
   <text x="122" y="58" text-anchor="middle" font-size="11" font-weight="600" fill="#22c55e">95%</text>
-
   <rect x="185" y="80" width="75" height="190" rx="4" fill="#22c55e" opacity="0.7"/>
   <text x="222" y="285" text-anchor="middle" font-size="10" fill="#334155">Test writing</text>
   <text x="222" y="73" text-anchor="middle" font-size="11" font-weight="600" fill="#22c55e">90%</text>
-
   <rect x="285" y="105" width="75" height="165" rx="4" fill="#3b82f6" opacity="0.75"/>
   <text x="322" y="285" text-anchor="middle" font-size="10" fill="#334155">Bug fixes</text>
   <text x="322" y="98" text-anchor="middle" font-size="11" font-weight="600" fill="#3b82f6">78%</text>
-
   <rect x="385" y="130" width="75" height="140" rx="4" fill="#3b82f6" opacity="0.6"/>
   <text x="422" y="285" text-anchor="middle" font-size="10" fill="#334155">New features</text>
   <text x="422" y="123" text-anchor="middle" font-size="11" font-weight="600" fill="#3b82f6">65%</text>
-
   <rect x="485" y="185" width="75" height="85" rx="4" fill="#eab308" opacity="0.7"/>
   <text x="522" y="285" text-anchor="middle" font-size="10" fill="#334155">Design</text>
   <text x="522" y="178" text-anchor="middle" font-size="11" font-weight="600" fill="#eab308">40%</text>
-
   <rect x="585" y="225" width="75" height="45" rx="4" fill="#ef4444" opacity="0.7"/>
   <text x="622" y="285" text-anchor="middle" font-size="10" fill="#334155">Architecture</text>
   <text x="622" y="218" text-anchor="middle" font-size="11" font-weight="600" fill="#ef4444">20%</text>

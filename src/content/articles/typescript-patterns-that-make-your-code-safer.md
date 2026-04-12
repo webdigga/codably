@@ -241,23 +241,18 @@ This catches a genuinely common bug: accessing array elements without checking w
   <text x="210" y="100" text-anchor="end" font-size="11" fill="#334155">Discriminated unions</text>
   <rect x="220" y="86" width="400" height="22" fill="#22c55e" rx="3"/>
   <text x="630" y="101" font-size="11" font-weight="600" fill="#166534">High</text>
-
   <text x="210" y="138" text-anchor="end" font-size="11" fill="#334155">noUncheckedIndexedAccess</text>
   <rect x="220" y="124" width="340" height="22" fill="#22c55e" rx="3"/>
   <text x="570" y="139" font-size="11" font-weight="600" fill="#166534">High</text>
-
   <text x="210" y="176" text-anchor="end" font-size="11" fill="#334155">Result types</text>
   <rect x="220" y="162" width="300" height="22" fill="#3b82f6" rx="3"/>
   <text x="530" y="177" font-size="11" font-weight="600" fill="#1e40af">Medium-High</text>
-
   <text x="210" y="214" text-anchor="end" font-size="11" fill="#334155">unknown over any</text>
   <rect x="220" y="200" width="260" height="22" fill="#3b82f6" rx="3"/>
   <text x="490" y="215" font-size="11" font-weight="600" fill="#1e40af">Medium</text>
-
   <text x="210" y="252" text-anchor="end" font-size="11" fill="#334155">Branded types</text>
   <rect x="220" y="238" width="200" height="22" fill="#f59e0b" rx="3"/>
   <text x="430" y="253" font-size="11" font-weight="600" fill="#92400e">Medium</text>
-
   <text x="210" y="290" text-anchor="end" font-size="11" fill="#334155">Template literal types</text>
   <rect x="220" y="276" width="140" height="22" fill="#f59e0b" rx="3"/>
   <text x="370" y="291" font-size="11" font-weight="600" fill="#92400e">Moderate</text>

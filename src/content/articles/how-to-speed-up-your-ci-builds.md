@@ -54,60 +54,46 @@ Once you have your baseline, set a target. A useful framework is a build time bu
     text { font-family: 'Inter', system-ui, sans-serif; }
   </style>
   <text x="350" y="24" text-anchor="middle" font-size="15" font-weight="600" fill="#334155">CI Build Time: Before vs After Optimisation</text>
-
   <!-- Before label -->
   <text x="10" y="65" font-size="12" font-weight="600" fill="#334155">Before</text>
   <text x="10" y="80" font-size="10" fill="#64748b">(25 min)</text>
-
   <!-- Before bars -->
   <rect x="80" y="52" width="60" height="28" rx="3" fill="#ef4444" />
   <text x="110" y="71" text-anchor="middle" font-size="9" fill="#ffffff">Install</text>
   <text x="110" y="94" text-anchor="middle" font-size="8" fill="#64748b">5 min</text>
-
   <rect x="144" y="52" width="84" height="28" rx="3" fill="#ef4444" opacity="0.9" />
   <text x="186" y="71" text-anchor="middle" font-size="9" fill="#ffffff">Build</text>
   <text x="186" y="94" text-anchor="middle" font-size="8" fill="#64748b">7 min</text>
-
   <rect x="232" y="52" width="24" height="28" rx="3" fill="#ef4444" opacity="0.8" />
   <text x="244" y="71" text-anchor="middle" font-size="9" fill="#ffffff">Lint</text>
   <text x="244" y="94" text-anchor="middle" font-size="8" fill="#64748b">2 min</text>
-
   <rect x="260" y="52" width="108" height="28" rx="3" fill="#ef4444" opacity="0.7" />
   <text x="314" y="71" text-anchor="middle" font-size="9" fill="#ffffff">Tests (serial)</text>
   <text x="314" y="94" text-anchor="middle" font-size="8" fill="#64748b">9 min</text>
-
   <rect x="372" y="52" width="24" height="28" rx="3" fill="#ef4444" opacity="0.6" />
   <text x="384" y="71" text-anchor="middle" font-size="9" fill="#ffffff">Pkg</text>
   <text x="384" y="94" text-anchor="middle" font-size="8" fill="#64748b">2 min</text>
-
   <!-- After label -->
   <text x="10" y="155" font-size="12" font-weight="600" fill="#334155">After</text>
   <text x="10" y="170" font-size="10" fill="#64748b">(7 min)</text>
-
   <!-- After bars -->
   <rect x="80" y="142" width="12" height="28" rx="3" fill="#22c55e" />
   <text x="86" y="161" text-anchor="middle" font-size="9" fill="#ffffff">I</text>
   <text x="86" y="184" text-anchor="middle" font-size="8" fill="#64748b">1 min</text>
-
   <rect x="96" y="142" width="36" height="28" rx="3" fill="#22c55e" opacity="0.9" />
   <text x="114" y="161" text-anchor="middle" font-size="9" fill="#ffffff">Build</text>
   <text x="114" y="184" text-anchor="middle" font-size="8" fill="#64748b">3 min</text>
-
   <rect x="136" y="142" width="12" height="28" rx="3" fill="#22c55e" opacity="0.8" />
   <text x="142" y="161" text-anchor="middle" font-size="9" fill="#ffffff">L</text>
   <text x="142" y="184" text-anchor="middle" font-size="8" fill="#64748b">30s</text>
-
   <rect x="152" y="142" width="36" height="28" rx="3" fill="#22c55e" opacity="0.7" />
   <text x="170" y="161" text-anchor="middle" font-size="9" fill="#ffffff">Tests</text>
   <text x="170" y="184" text-anchor="middle" font-size="8" fill="#64748b">2 min</text>
-
   <rect x="192" y="142" width="8" height="28" rx="3" fill="#22c55e" opacity="0.6" />
   <text x="196" y="161" text-anchor="middle" font-size="7" fill="#ffffff">P</text>
   <text x="196" y="184" text-anchor="middle" font-size="8" fill="#64748b">30s</text>
-
   <!-- Legend -->
   <text x="80" y="230" font-size="10" fill="#64748b">Key savings: cached dependencies (4 min), incremental build (4 min), parallel tests (7 min), cached lint (1.5 min)</text>
-
   <!-- Scale line -->
   <line x1="80" y1="250" x2="476" y2="250" stroke="#e2e8f0" stroke-width="1" />
   <text x="80" y="268" font-size="9" fill="#94a3b8">0</text>
@@ -231,7 +217,6 @@ Most CI platforms let you run independent jobs concurrently. Structure your pipe
     text { font-family: 'Inter', system-ui, sans-serif; }
   </style>
   <text x="350" y="22" text-anchor="middle" font-size="15" font-weight="600" fill="#334155">Sequential vs Parallel Pipeline Execution</text>
-
   <!-- Sequential -->
   <text x="10" y="62" font-size="11" font-weight="600" fill="#334155">Sequential</text>
   <text x="10" y="76" font-size="9" fill="#94a3b8">(12 min)</text>
@@ -245,32 +230,24 @@ Most CI platforms let you run independent jobs concurrently. Structure your pipe
   <text x="352" y="68" text-anchor="middle" font-size="10" fill="#4c1d95">Tests</text>
   <rect x="406" y="48" width="80" height="30" rx="4" fill="#ddd6fe" />
   <text x="446" y="68" text-anchor="middle" font-size="10" fill="#4c1d95">Build</text>
-
   <!-- Arrow -->
   <text x="350" y="112" text-anchor="middle" font-size="20" fill="#22c55e">&#8595;</text>
-
   <!-- Parallel -->
   <text x="10" y="148" font-size="11" font-weight="600" fill="#334155">Parallel</text>
   <text x="10" y="162" font-size="9" fill="#94a3b8">(5 min)</text>
-
   <!-- Install (shared) -->
   <rect x="90" y="130" width="60" height="30" rx="4" fill="#6366f1" />
   <text x="120" y="150" text-anchor="middle" font-size="10" fill="#fff">Install</text>
-
   <!-- Parallel branches -->
   <rect x="154" y="130" width="50" height="30" rx="4" fill="#22c55e" />
   <text x="179" y="150" text-anchor="middle" font-size="10" fill="#fff">Lint</text>
-
   <rect x="154" y="164" width="50" height="30" rx="4" fill="#22c55e" opacity="0.9" />
   <text x="179" y="184" text-anchor="middle" font-size="10" fill="#fff">Types</text>
-
   <rect x="154" y="198" width="100" height="30" rx="4" fill="#22c55e" opacity="0.8" />
   <text x="204" y="218" text-anchor="middle" font-size="10" fill="#fff">Tests</text>
-
   <!-- Build after parallel -->
   <rect x="258" y="130" width="60" height="30" rx="4" fill="#22c55e" opacity="0.7" />
   <text x="288" y="150" text-anchor="middle" font-size="10" fill="#fff">Build</text>
-
   <!-- Bracket lines -->
   <line x1="150" y1="135" x2="150" y2="225" stroke="#e2e8f0" stroke-width="1" />
   <line x1="254" y1="135" x2="254" y2="225" stroke="#e2e8f0" stroke-width="1" />

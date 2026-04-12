@@ -11,6 +11,7 @@
 - **FAQs:** Include FAQ sections where possible (good for featured snippets and AEO)
 - **Tables:** Use nicely styled tables for tabular data
 - **SVG charts:** Create inline SVG charts/diagrams where applicable to visualise data
+- **SVG blank lines:** Never include blank lines inside `<svg>...</svg>` blocks in markdown files. CommonMark treats a blank line as the end of an HTML block, which truncates the SVG. All SVG content must be on consecutive non-blank lines.
 - **Internal linking:** Link to other pages/posts on the same site
 - **External linking:** Link to authoritative external sources where relevant. External links must open in a new tab (`target="_blank" rel="noopener noreferrer"`) and include a small external link icon (e.g. `↗` or an SVG) so users know they are leaving the site. **Every external URL should be verified with a curl/fetch check (expecting a 200 status) before being added to an article.** If a URL returns a non-200 status, find a working alternative. If you cannot verify URLs (e.g. no network access), still include them but flag which ones were not verified so the user can check them.
 - **UK English:** Use UK spelling throughout (colour, organised, centralised, etc.)

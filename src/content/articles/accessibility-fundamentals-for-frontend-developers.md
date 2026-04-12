@@ -82,27 +82,21 @@ The WebAIM Million report consistently finds the same categories of failure year
   <text x="175" y="68" text-anchor="end" font-size="12" fill="#334155">Low contrast text</text>
   <rect x="185" y="55" width="415" height="22" rx="3" fill="#ef4444" opacity="0.85"/>
   <text x="608" y="71" font-size="11" fill="#fff" font-weight="600">83%</text>
-
   <text x="175" y="108" text-anchor="end" font-size="12" fill="#334155">Missing alt text</text>
   <rect x="185" y="95" width="275" height="22" rx="3" fill="#f97316" opacity="0.85"/>
   <text x="466" y="111" font-size="11" fill="#fff" font-weight="600">55%</text>
-
   <text x="175" y="148" text-anchor="end" font-size="12" fill="#334155">Missing form labels</text>
   <rect x="185" y="135" width="230" height="22" rx="3" fill="#eab308" opacity="0.85"/>
   <text x="422" y="151" font-size="11" fill="#334155" font-weight="600">46%</text>
-
   <text x="175" y="188" text-anchor="end" font-size="12" fill="#334155">Empty links</text>
   <rect x="185" y="175" width="220" height="22" rx="3" fill="#22c55e" opacity="0.85"/>
   <text x="412" y="191" font-size="11" fill="#334155" font-weight="600">44%</text>
-
   <text x="175" y="228" text-anchor="end" font-size="12" fill="#334155">Empty buttons</text>
   <rect x="185" y="215" width="135" height="22" rx="3" fill="#3b82f6" opacity="0.85"/>
   <text x="327" y="231" font-size="11" fill="#334155" font-weight="600">27%</text>
-
   <text x="175" y="268" text-anchor="end" font-size="12" fill="#334155">Missing lang attribute</text>
   <rect x="185" y="255" width="90" height="22" rx="3" fill="#8b5cf6" opacity="0.85"/>
   <text x="282" y="271" font-size="11" fill="#334155" font-weight="600">18%</text>
-
   <!-- Source -->
   <text x="350" y="305" text-anchor="middle" font-size="10" fill="#94a3b8">Source: WebAIM Million annual analysis of top 1,000,000 home pages</text>
 </svg>
