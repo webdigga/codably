@@ -52,7 +52,7 @@ Static editorial site covering developer productivity, tooling, and workflows.
 ## Content
 - **Articles:** 53 articles across 12 categories
 - **Categories:** AI Tools, Workflows, DevOps, Code Quality, Tools & Tech, Productivity, Collaboration, Architecture, Career, Frontend, Backend, Open Source
-- **Authors:** David White (Editor, Codably), Jonny Rowse (Editor, Codably), Gareth Clubb (Editor, Codably), Zubair Hasan (Editor, Codably). Aim for a rough split across articles when writing new batches.
+- **Authors:** David White (Editor, Codably), Jonny Rowse (Editor, Codably), Gareth Clubb (Editor, Codably), Zubair Hasan (Editor, Codably). Assign authors in an even 1-in-4 rotation. Do not favour any author or try to rebalance historical counts.
 - **publishDate:** Never set `publishDate` to a future date. Articles appear on the live site immediately after deploy, so a future date looks wrong to readers. Always use today's date or earlier.
 - **dateModified:** Roughly 25% of articles should have a `dateModified` frontmatter field with a date later than `publishDate`. This displays an "Updated" label in the article meta. When writing a batch of new articles, add `dateModified` to ~1 in 4. Only add it when the date genuinely differs from `publishDate`.
 
