@@ -25,6 +25,7 @@
 - **Call to action:** Include a relevant call to action where natural
 - **Reading time:** Calculate based on ~230 words per minute
 - **No en/em dashes:** Never use en dashes (-) or em dashes (--) in blog content. Use commas, colons, semicolons, or rewrite the sentence instead
+- **Frontmatter first line:** The YAML frontmatter `---` must be the very first line of every `.md` file. Never place HTML comments, blank lines, or any other content before the opening `---`. Astro will fail to parse the file otherwise.
 - **Repo structure:** Always check an existing post in this repo before writing a new one
 - **Topic overlap:** Before proposing new article topics, list all existing article filenames and scan for overlap. Never propose a topic that already has a published article
 - **Topical content:** Where possible, make blog content topical. If there is a big event or something notable in the calendar in the forthcoming days or weeks, reference it in the blog. This will not always be possible, so only do this when it makes sense. Always confirm the current date before referencing upcoming events — do not assume or guess the date.

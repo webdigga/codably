@@ -1,4 +1,3 @@
-<!-- Reading time: ~10 minutes (2,300 words at 230 wpm) -->
 ---
 title: "The Developer's Guide to Secure Coding Practices"
 description: "Learn secure coding practices every developer should know, from input validation and dependency auditing to secrets management and threat modelling."
