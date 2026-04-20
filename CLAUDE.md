@@ -13,7 +13,8 @@
 - **SVG charts:** Create inline SVG charts/diagrams where applicable to visualise data
 - **SVG blank lines:** Never include blank lines inside `<svg>...</svg>` blocks in markdown files. CommonMark treats a blank line as the end of an HTML block, which truncates the SVG. All SVG content must be on consecutive non-blank lines.
 - **Internal linking:** Link to other pages/posts on the same site
-- **External linking:** Link to authoritative external sources where relevant. External links must open in a new tab (`target="_blank" rel="noopener noreferrer"`) and include a small external link icon (e.g. `↗` or an SVG) so users know they are leaving the site. **Every external URL should be verified with a curl/fetch check (expecting a 200 status) before being added to an article.** If a URL returns a non-200 status, find a working alternative. If you cannot verify URLs (e.g. no network access), still include them but flag which ones were not verified so the user can check them.
+- **External linking:** Link to authoritative external sources where relevant. External links must open in a new tab (`target="_blank" rel="noopener noreferrer"`) and include a small external link icon (e.g. `↗` or an SVG) so users know they are leaving the site. **Every external URL must be verified with a curl/fetch check (expecting a 200 status) before being added to an article.** If a URL returns a non-200 status, find a working alternative. If you cannot verify URLs (e.g. no network access), still include them but flag which ones were not verified so the user can check them.
+- **Link check before shipping:** After creating or editing a post, extract every link (internal and external) and verify each one resolves 200 before the post is considered complete. Internal links: confirm the target `category` frontmatter (see Internal links section further down) and that the `{category}/{slug}` path renders. External links: curl. Broken links have shipped repeatedly and damage the site; this step is non-negotiable.
 - **UK English:** Use UK spelling throughout (colour, organised, centralised, etc.)
 - **Heading hierarchy:** Proper H2 -> H3 nesting, never skip levels
 - **Meta description:** Aim for 160 characters max (the SEO sweet spot). The Zod schema allows up to 180 to avoid build failures over a few extra characters, but always target 160. Include the primary keyword.
@@ -29,6 +30,14 @@
 - **Repo structure:** Always check an existing post in this repo before writing a new one
 - **Topic overlap:** Before proposing new article topics, list all existing article filenames and scan for overlap. Never propose a topic that already has a published article
 - **Topical content:** Where possible, make blog content topical. If there is a big event or something notable in the calendar in the forthcoming days or weeks, reference it in the blog. This will not always be possible, so only do this when it makes sense. Always confirm the current date before referencing upcoming events — do not assume or guess the date.
+- **Vary the form:** Not every post follows intro / "The Problem" / "How X Works" / "Best Practices". Mix forms: opinion piece, field notes, teardown of an incident or product, how-to with code, comparison, FAQ-led, numbers-led.
+- **Vary the opening:** Avoid restating the title or starting with "In recent years / Today's teams / Modern...". Open with a concrete observation, a number, a position, a question or a short anecdote.
+- **Be specific:** Replace generic "teams often..." with a specific number or a named incident. Generic claims read as AI-drafted.
+- **Take a position:** State what works and what does not. Cut hedging like "it is worth noting", "you should consider" and "various approaches".
+- **Cut meta sentences:** Remove "In this article we will...", "As we have seen..." and "In summary...". Let the structure do the work.
+- **Vary length:** Some topics earn 400 words. Others earn 1500. Do not pad to a target length.
+- **First-person is allowed** when the author has first-hand experience. Do not fabricate experience.
+- **Real beats generic:** Real code snippets, real numbers with citations, real incidents. Use them where they help.
 
 ## CSS
 - **Mobile first:** All CSS must be mobile first. Never use `max-width` media queries. Use `min-width` only.
